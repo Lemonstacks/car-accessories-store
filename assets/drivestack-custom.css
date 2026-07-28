@@ -1,0 +1,614 @@
+/* ==========================================================================
+   DriveStack Custom Styles
+   Premium automotive accessories brand styling
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Custom Properties (DriveStack Brand)
+   -------------------------------------------------------------------------- */
+:root {
+  --ds-color-black: #111111;
+  --ds-color-white: #FFFFFF;
+  --ds-color-blue: #007BFF;
+  --ds-color-blue-hover: #0056b3;
+  --ds-color-gray-dark: #1a1a1a;
+  --ds-color-gray-medium: #2a2a2a;
+  --ds-color-gray-light: #f5f5f5;
+  --ds-color-gray-muted: #888888;
+  --ds-color-border: #222222;
+
+  --ds-font-heading: var(--font-heading--family, 'Barlow', sans-serif);
+  --ds-font-body: var(--font-body--family, 'Inter', sans-serif);
+
+  --ds-radius-sm: 4px;
+  --ds-radius-md: 8px;
+  --ds-radius-lg: 12px;
+
+  --ds-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --ds-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --ds-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+
+  --ds-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   DriveStack Hero Section
+   -------------------------------------------------------------------------- */
+.ds-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  overflow: hidden;
+  background-color: var(--ds-color-black);
+}
+
+.ds-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.ds-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.ds-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(17, 17, 17, 0.3) 0%,
+    rgba(17, 17, 17, 0.7) 100%
+  );
+  z-index: 2;
+}
+
+.ds-hero__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+}
+
+.ds-hero__heading {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: var(--ds-color-white);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+}
+
+.ds-hero__subheading {
+  font-family: var(--ds-font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0 0 2rem;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.ds-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  background-color: var(--ds-color-blue);
+  color: var(--ds-color-white);
+  font-family: var(--ds-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--ds-radius-sm);
+  transition: background-color var(--ds-transition), transform var(--ds-transition);
+  border: none;
+  cursor: pointer;
+}
+
+.ds-hero__cta:hover {
+  background-color: var(--ds-color-blue-hover);
+  transform: translateY(-2px);
+}
+
+.ds-hero__cta:focus-visible {
+  outline: 2px solid var(--ds-color-blue);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   DriveStack Categories Section
+   -------------------------------------------------------------------------- */
+.ds-categories {
+  padding: 5rem 0;
+  background-color: var(--ds-color-white);
+}
+
+.ds-categories__container {
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.ds-categories__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ds-categories__title {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--ds-color-black);
+  margin: 0 0 0.75rem;
+}
+
+.ds-categories__subtitle {
+  font-family: var(--ds-font-body);
+  font-size: 1rem;
+  color: var(--ds-color-gray-muted);
+  margin: 0;
+}
+
+.ds-categories__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 989px) {
+  .ds-categories__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 549px) {
+  .ds-categories__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.ds-category-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background-color: var(--ds-color-gray-light);
+  border-radius: var(--ds-radius-md);
+  text-decoration: none;
+  transition: transform var(--ds-transition), box-shadow var(--ds-transition);
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.ds-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ds-shadow-md);
+}
+
+.ds-category-card:focus-visible {
+  outline: 2px solid var(--ds-color-blue);
+  outline-offset: 2px;
+}
+
+.ds-category-card__icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  color: var(--ds-color-blue);
+}
+
+.ds-category-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ds-category-card__title {
+  font-family: var(--ds-font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ds-color-black);
+  margin: 0;
+  text-align: center;
+}
+
+.ds-category-card__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.ds-category-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--ds-transition);
+}
+
+.ds-category-card:hover .ds-category-card__image img {
+  transform: scale(1.05);
+}
+
+.ds-category-card--has-image .ds-category-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17, 17, 17, 0.8) 0%, rgba(17, 17, 17, 0.3) 100%);
+  z-index: 1;
+}
+
+.ds-category-card--has-image .ds-category-card__title {
+  position: relative;
+  z-index: 2;
+  color: var(--ds-color-white);
+}
+
+.ds-category-card--has-image .ds-category-card__icon {
+  position: relative;
+  z-index: 2;
+  color: var(--ds-color-blue);
+}
+
+/* --------------------------------------------------------------------------
+   DriveStack Trust Section
+   -------------------------------------------------------------------------- */
+.ds-trust {
+  padding: 4rem 0;
+  background-color: var(--ds-color-black);
+}
+
+.ds-trust__container {
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.ds-trust__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ds-trust__title {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--ds-color-white);
+  margin: 0 0 0.75rem;
+}
+
+.ds-trust__subtitle {
+  font-family: var(--ds-font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.ds-trust__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 989px) {
+  .ds-trust__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 549px) {
+  .ds-trust__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.ds-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.ds-trust-item__icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.25rem;
+  color: var(--ds-color-blue);
+}
+
+.ds-trust-item__icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 1.5;
+}
+
+.ds-trust-item__title {
+  font-family: var(--ds-font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ds-color-white);
+  margin: 0 0 0.5rem;
+}
+
+.ds-trust-item__description {
+  font-family: var(--ds-font-body);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   DriveStack Reviews Section
+   -------------------------------------------------------------------------- */
+.ds-reviews {
+  padding: 5rem 0;
+  background-color: var(--ds-color-gray-light);
+}
+
+.ds-reviews__container {
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.ds-reviews__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ds-reviews__title {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--ds-color-black);
+  margin: 0 0 0.75rem;
+}
+
+.ds-reviews__subtitle {
+  font-family: var(--ds-font-body);
+  font-size: 1rem;
+  color: var(--ds-color-gray-muted);
+  margin: 0;
+}
+
+.ds-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 989px) {
+  .ds-reviews__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 549px) {
+  .ds-reviews__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ds-review-card {
+  background-color: var(--ds-color-white);
+  border-radius: var(--ds-radius-md);
+  padding: 2rem;
+  box-shadow: var(--ds-shadow-sm);
+  transition: box-shadow var(--ds-transition);
+}
+
+.ds-review-card:hover {
+  box-shadow: var(--ds-shadow-md);
+}
+
+.ds-review-card__stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  color: #FFB800;
+}
+
+.ds-review-card__stars svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.ds-review-card__text {
+  font-family: var(--ds-font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ds-color-black);
+  margin: 0 0 1.25rem;
+}
+
+.ds-review-card__author {
+  font-family: var(--ds-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ds-color-gray-muted);
+  margin: 0;
+}
+
+/* Reviews app container - ensures any injected review app styles nicely */
+.ds-reviews__app-container {
+  margin-top: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   DriveStack Newsletter Section
+   -------------------------------------------------------------------------- */
+.ds-newsletter {
+  padding: 5rem 0;
+  background-color: var(--ds-color-gray-dark);
+}
+
+.ds-newsletter__container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.ds-newsletter__title {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--ds-color-white);
+  margin: 0 0 0.75rem;
+}
+
+.ds-newsletter__subtitle {
+  font-family: var(--ds-font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 2rem;
+}
+
+.ds-newsletter__form {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (max-width: 549px) {
+  .ds-newsletter__form {
+    flex-direction: column;
+  }
+}
+
+.ds-newsletter__input {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  font-family: var(--ds-font-body);
+  font-size: 1rem;
+  background-color: var(--ds-color-gray-medium);
+  border: 1px solid var(--ds-color-border);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-color-white);
+  outline: none;
+  transition: border-color var(--ds-transition);
+}
+
+.ds-newsletter__input::placeholder {
+  color: var(--ds-color-gray-muted);
+}
+
+.ds-newsletter__input:focus {
+  border-color: var(--ds-color-blue);
+}
+
+.ds-newsletter__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.75rem;
+  background-color: var(--ds-color-blue);
+  color: var(--ds-color-white);
+  font-family: var(--ds-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--ds-radius-sm);
+  cursor: pointer;
+  transition: background-color var(--ds-transition);
+  white-space: nowrap;
+}
+
+.ds-newsletter__button:hover {
+  background-color: var(--ds-color-blue-hover);
+}
+
+.ds-newsletter__button:focus-visible {
+  outline: 2px solid var(--ds-color-blue);
+  outline-offset: 3px;
+}
+
+.ds-newsletter__disclaimer {
+  font-family: var(--ds-font-body);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 1rem 0 0;
+}
+
+/* --------------------------------------------------------------------------
+   DriveStack Product Page Trust Badges
+   -------------------------------------------------------------------------- */
+.ds-product-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--ds-color-gray-light);
+  border-bottom: 1px solid var(--ds-color-gray-light);
+  margin: 1.5rem 0;
+}
+
+.ds-product-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ds-font-body);
+  font-size: 0.8125rem;
+  color: var(--ds-color-gray-muted);
+}
+
+.ds-product-trust__item svg {
+  width: 20px;
+  height: 20px;
+  color: var(--ds-color-blue);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   DriveStack Product Specifications
+   -------------------------------------------------------------------------- */
+.ds-specs {
+  margin: 1.5rem 0;
+}
+
+.ds-specs__title {
+  font-family: var(--ds-font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ds-color-black);
+  margin: 0 0 1rem;
+}
+
+.ds-specs__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ds-specs__table tr:nth-child(even) {
+  background-color: var(--ds-color-gray-light);
+}
+
+.ds-specs__table td {
+  padding: 0.75rem 1rem;
+  font-family: var(--ds-font-body);
+  font-size: 0.875rem;
+  border-bottom: 1px solid #eee;
+}
+
+.ds-specs__table td:first-child {
+  font-weight: 600;
+  color: var(--ds-color-black);
+  width: 40%;
+}
+
+.ds-specs__table td:last-child {
+  color: #555;
+}

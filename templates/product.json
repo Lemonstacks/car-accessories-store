@@ -264,6 +264,41 @@
         "padding-block-end": 0
       }
     },
+    "drivestack_product_extras": {
+      "type": "drivestack-product-extras",
+      "blocks": {
+        "spec_1": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Material",
+            "value": "Premium ABS Plastic"
+          }
+        },
+        "spec_2": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Compatibility",
+            "value": "Universal Fit"
+          }
+        },
+        "spec_3": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Warranty",
+            "value": "1 Year Manufacturer Warranty"
+          }
+        }
+      },
+      "block_order": [
+        "spec_1",
+        "spec_2",
+        "spec_3"
+      ],
+      "settings": {
+        "show_trust_badges": true,
+        "specs_title": "Product Specifications"
+      }
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -408,6 +443,7 @@
   },
   "order": [
     "main",
+    "drivestack_product_extras",
     "product_recommendations_qggXJq"
   ]
 }

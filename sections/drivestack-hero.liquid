@@ -1,0 +1,113 @@
+{% comment %}
+  DriveStack Hero Banner
+  Full-width hero with dark automotive imagery, configurable via Theme Editor.
+{% endcomment %}
+
+{{ 'drivestack-custom.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="ds-hero"
+  style="min-height: {{ section.settings.section_height }}vh;"
+  aria-label="{{ section.settings.heading | escape }}"
+>
+  {% if section.settings.image != blank %}
+    <div class="ds-hero__media">
+      {{
+        section.settings.image
+        | image_url: width: 2000
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '600,900,1200,1600,2000',
+          alt: section.settings.image.alt | default: section.settings.heading
+      }}
+    </div>
+  {% else %}
+    <div class="ds-hero__media">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {% endif %}
+
+  <div class="ds-hero__overlay"></div>
+
+  <div class="ds-hero__content">
+    {% if section.settings.heading != blank %}
+      <h1 class="ds-hero__heading">{{ section.settings.heading }}</h1>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="ds-hero__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    {% if section.settings.button_label != blank %}
+      <a
+        href="{{ section.settings.button_link }}"
+        class="ds-hero__cta"
+        {% if section.settings.button_link == blank %}
+          role="link"
+          aria-disabled="true"
+        {% endif %}
+      >
+        {{ section.settings.button_label }}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DriveStack Hero",
+  "tag": "section",
+  "class": "drivestack-hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Recommended: 2000 x 1000px minimum. Dark automotive imagery works best."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Upgrade Every Drive."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Premium car accessories engineered for style, comfort, and performance."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section height (vh)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 90,
+      "unit": "vh"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DriveStack Hero"
+    }
+  ]
+}
+{% endschema %}

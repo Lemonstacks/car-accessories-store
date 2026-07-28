@@ -1,0 +1,87 @@
+{% comment %}
+  DriveStack Product Extras
+  Trust badges and product specifications for product pages.
+  Add this section below the main product information.
+{% endcomment %}
+
+{{ 'drivestack-custom.css' | asset_url | stylesheet_tag }}
+
+<div class="ds-product-extras page-width" style="max-width: var(--page-width, 1200px); margin: 0 auto; padding: 0 1.5rem;">
+  {% if section.settings.show_trust_badges %}
+    {% render 'drivestack-product-trust' %}
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="ds-specs">
+      {% if section.settings.specs_title != blank %}
+        <h2 class="ds-specs__title">{{ section.settings.specs_title }}</h2>
+      {% endif %}
+
+      <table class="ds-specs__table" role="table" aria-label="{{ section.settings.specs_title | default: 'Product Specifications' | escape }}">
+        <tbody>
+          {% for block in section.blocks %}
+            {% if block.settings.label != blank %}
+              <tr {{ block.shopify_attributes }}>
+                <td>{{ block.settings.label }}</td>
+                <td>{{ block.settings.value }}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "DriveStack Product Extras",
+  "tag": "section",
+  "class": "drivestack-product-extras-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show trust badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "specs_title",
+      "label": "Specifications heading",
+      "default": "Product Specifications"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec_row",
+      "name": "Specification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Material"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "Premium ABS Plastic"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DriveStack Product Extras",
+      "blocks": [
+        { "type": "spec_row", "settings": { "label": "Material", "value": "Premium ABS Plastic" } },
+        { "type": "spec_row", "settings": { "label": "Compatibility", "value": "Universal Fit" } },
+        { "type": "spec_row", "settings": { "label": "Warranty", "value": "1 Year Manufacturer Warranty" } }
+      ]
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}
