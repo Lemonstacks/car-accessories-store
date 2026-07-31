@@ -12,6 +12,7 @@
     "drivestack_hero": {
       "type": "drivestack-hero",
       "settings": {
+        "image": "shopify://shop_images/samuele-errico-piccarini-FMbWFDiVRPs-unsplash.jpg",
         "heading": "Upgrade Every Drive.",
         "subheading": "Premium car accessories engineered for style, comfort, and performance.",
         "button_label": "Shop Now",
@@ -26,32 +27,32 @@
           "type": "category",
           "settings": {
             "title": "Interior",
-            "icon": "interior",
-            "link": ""
+            "link": "",
+            "icon": "interior"
           }
         },
         "cat_exterior": {
           "type": "category",
           "settings": {
             "title": "Exterior",
-            "icon": "exterior",
-            "link": ""
+            "link": "",
+            "icon": "exterior"
           }
         },
         "cat_electronics": {
           "type": "category",
           "settings": {
             "title": "Electronics",
-            "icon": "electronics",
-            "link": ""
+            "link": "",
+            "icon": "electronics"
           }
         },
         "cat_detailing": {
           "type": "category",
           "settings": {
             "title": "Detailing",
-            "icon": "detailing",
-            "link": ""
+            "link": "",
+            "icon": "detailing"
           }
         }
       },
@@ -172,8 +173,6 @@
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
-                "link": "",
-                "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "flex-start",
@@ -201,6 +200,8 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
                 "padding-block-start": 8,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -237,13 +238,18 @@
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
                     "type_preset": "paragraph",
                     "width": "100%",
                     "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -272,6 +278,7 @@
         "max_products": 8,
         "columns": 4,
         "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
         "columns_gap": 16,
         "rows_gap": 32,
         "icons_style": "arrow",
