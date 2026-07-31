@@ -1,84 +1,39 @@
 {% comment %}
-  DriveStack Featured Categories
-  Displays 4 configurable category cards with icons or images.
+  DriveStack Categories — Dark full-bleed cards, bottom-anchored text
 {% endcomment %}
-
 {{ 'drivestack-custom.css' | asset_url | stylesheet_tag }}
 
-<section class="ds-categories" aria-label="{{ section.settings.heading | default: 'Shop by Category' | escape }}">
-  <div class="ds-categories__container">
-    {% if section.settings.heading != blank or section.settings.subheading != blank %}
-      <div class="ds-categories__header">
-        {% if section.settings.heading != blank %}
-          <h2 class="ds-categories__title">{{ section.settings.heading }}</h2>
-        {% endif %}
-        {% if section.settings.subheading != blank %}
-          <p class="ds-categories__subtitle">{{ section.settings.subheading }}</p>
-        {% endif %}
-      </div>
-    {% endif %}
-
-    <div class="ds-categories__grid">
-      {% for block in section.blocks %}
-        <a
-          href="{{ block.settings.link | default: '#' }}"
-          class="ds-category-card{% if block.settings.image != blank %} ds-category-card--has-image{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          {% if block.settings.image != blank %}
-            <div class="ds-category-card__image">
-              {{
-                block.settings.image
-                | image_url: width: 600
-                | image_tag:
-                  loading: 'lazy',
-                  sizes: '(max-width: 549px) 100vw, (max-width: 989px) 50vw, 25vw',
-                  widths: '300,400,600',
-                  alt: block.settings.title
-              }}
-            </div>
-            <div class="ds-category-card__overlay"></div>
-          {% endif %}
-
-          <div class="ds-category-card__icon" aria-hidden="true">
-            {% case block.settings.icon %}
-              {% when 'interior' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="11" width="18" height="10" rx="2"/>
-                  <path d="M6 11V6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v5"/>
-                  <path d="M8 15h2M14 15h2"/>
-                </svg>
-              {% when 'exterior' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 17h14M6 13l2-6h8l2 6"/>
-                  <circle cx="7.5" cy="17" r="2"/>
-                  <circle cx="16.5" cy="17" r="2"/>
-                  <path d="M3 13h18"/>
-                </svg>
-              {% when 'electronics' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2"/>
-                  <path d="M8 21h8M12 17v4"/>
-                  <path d="M7 8l3 3-3 3M13 14h4"/>
-                </svg>
-              {% when 'detailing' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                  <path d="M2 17l10 5 10-5"/>
-                  <path d="M2 12l10 5 10-5"/>
-                </svg>
-              {% else %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 8v4l3 3"/>
-                </svg>
-            {% endcase %}
-          </div>
-
-          <h3 class="ds-category-card__title">{{ block.settings.title }}</h3>
-        </a>
-      {% endfor %}
+<section class="ds-categories" aria-label="{{ section.settings.heading | default: 'Categories' | escape }}">
+  {% if section.settings.heading != blank or section.settings.subheading != blank %}
+    <div class="ds-categories__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="ds-categories__title">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="ds-categories__subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
     </div>
+  {% endif %}
+
+  <div class="ds-categories__grid">
+    {% for block in section.blocks %}
+      <a href="{{ block.settings.link | default: '#' }}" class="ds-category-card" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          <div class="ds-category-card__image">
+            {{ block.settings.image | image_url: width: 800 | image_tag:
+              loading: 'lazy',
+              sizes: '(max-width: 549px) 50vw, (max-width: 989px) 50vw, 25vw',
+              widths: '400,600,800',
+              alt: block.settings.title }}
+          </div>
+        {% endif %}
+        <div class="ds-category-card__overlay"></div>
+        <div class="ds-category-card__body">
+          <span class="ds-category-card__title">{{ block.settings.title }}</span>
+          <span class="ds-category-card__arrow">Explore →</span>
+        </div>
+      </a>
+    {% endfor %}
   </div>
 </section>
 
@@ -88,68 +43,27 @@
   "tag": "section",
   "class": "drivestack-categories-section",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Shop by Category"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Find the perfect accessories for every part of your vehicle."
-    }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by Category" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Precision accessories for every build." }
   ],
-  "blocks": [
-    {
-      "type": "category",
-      "name": "Category",
-      "limit": 8,
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Category"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        },
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "interior", "label": "Interior" },
-            { "value": "exterior", "label": "Exterior" },
-            { "value": "electronics", "label": "Electronics" },
-            { "value": "detailing", "label": "Detailing" },
-            { "value": "default", "label": "Default" }
-          ],
-          "default": "default"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Background image (optional)",
-          "info": "If set, the image will be used as card background."
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "DriveStack Categories",
-      "blocks": [
-        { "type": "category", "settings": { "title": "Interior", "icon": "interior" } },
-        { "type": "category", "settings": { "title": "Exterior", "icon": "exterior" } },
-        { "type": "category", "settings": { "title": "Electronics", "icon": "electronics" } },
-        { "type": "category", "settings": { "title": "Detailing", "icon": "detailing" } }
-      ]
-    }
-  ]
+  "blocks": [{
+    "type": "category",
+    "name": "Category",
+    "limit": 8,
+    "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Category" },
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "image_picker", "id": "image", "label": "Card image", "info": "Portrait aspect ratio works best (3:4)." }
+    ]
+  }],
+  "presets": [{
+    "name": "DriveStack Categories",
+    "blocks": [
+      { "type": "category", "settings": { "title": "Interior" } },
+      { "type": "category", "settings": { "title": "Exterior" } },
+      { "type": "category", "settings": { "title": "Electronics" } },
+      { "type": "category", "settings": { "title": "Detailing" } }
+    ]
+  }]
 }
 {% endschema %}
