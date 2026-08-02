@@ -309,31 +309,31 @@
 .ds-product-trust {
   display: flex; flex-wrap: wrap; gap: 1.5rem;
   padding: 1.25rem 0; margin: 1.5rem 0;
-  border-top: 1px solid var(--ds-border); border-bottom: 1px solid var(--ds-border);
+  border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;
 }
 .ds-product-trust__item {
   display: flex; align-items: center; gap: .5rem;
   font: 600 .75rem/1 var(--ds-font-body);
   letter-spacing: .05em; text-transform: uppercase;
-  color: var(--ds-white-muted);
+  color: #555555;
 }
 .ds-product-trust__item svg { width: 18px; height: 18px; color: var(--ds-blue); flex-shrink: 0; }
 /* --- PRODUCT PAGE: Specs --- */
 .ds-specs { margin: 2rem 0; }
 .ds-specs__title {
   font: 700 .9375rem/1 var(--ds-font-heading);
-  color: var(--ds-white); text-transform: uppercase;
+  color: #111111; text-transform: uppercase;
   letter-spacing: .05em; margin: 0 0 1rem;
 }
 .ds-specs__table { width: 100%; border-collapse: collapse; }
-.ds-specs__table tr { border-bottom: 1px solid var(--ds-border); }
+.ds-specs__table tr { border-bottom: 1px solid #eee; }
 .ds-specs__table td {
   padding: .75rem 0; font: 400 .875rem/1.4 var(--ds-font-body);
 }
 .ds-specs__table td:first-child {
-  font-weight: 600; color: var(--ds-white-dim); width: 40%;
+  font-weight: 600; color: #222222; width: 40%;
 }
-.ds-specs__table td:last-child { color: var(--ds-white-muted); }
+.ds-specs__table td:last-child { color: #555555; }
 /* Success/error states */
 .ds-newsletter__error {
   background: rgba(255,60,60,.12); color: #ff6b6b; border: 1px solid rgba(255,60,60,.3);
@@ -391,7 +391,7 @@
 .product-information [class*="rte"] table td,
 .product-information [class*="rte"] table th {
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid var(--ds-border);
+  border-bottom: 1px solid #eee;
   text-align: left;
 }
 
