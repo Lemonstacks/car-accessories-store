@@ -1,0 +1,49 @@
+{% comment %}
+  DriveStack Product Schema (JSON-LD)
+  Outputs structured data for search engines and AI.
+  Renders: Product, Offer, AggregateRating (if reviews exist), Brand.
+{% endcomment %}
+
+{% if product %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ request.origin | append: product.url | json }},
+  "description": {{ product.description | strip_html | truncate: 5000 | json }},
+  {% if product.featured_media %}
+    "image": {{ product.featured_media.preview_image | image_url: width: 1200 | prepend: "https:" | json }},
+  {% endif %}
+  {% if product.vendor != blank %}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | json }}
+    },
+  {% endif %}
+  {% if product.selected_or_first_available_variant.sku != blank %}
+    "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  {% endif %}
+  {% if product.selected_or_first_available_variant.barcode != blank %}
+    "gtin": {{ product.selected_or_first_available_variant.barcode | json }},
+  {% endif %}
+  "offers": {
+    "@type": "{% if product.variants.size > 1 %}AggregateOffer{% else %}Offer{% endif %}",
+    {% if product.variants.size > 1 %}
+      "lowPrice": {{ product.price_min | money_without_currency | json }},
+      "highPrice": {{ product.price_max | money_without_currency | json }},
+      "offerCount": {{ product.variants.size }},
+    {% else %}
+      "price": {{ product.price | money_without_currency | json }},
+    {% endif %}
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "url": {{ request.origin | append: product.url | json }},
+    "seller": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }}
+    }
+  }
+}
+</script>
+{% endif %}

@@ -6,6 +6,8 @@
 
 {{ 'drivestack-custom.css' | asset_url | stylesheet_tag }}
 
+{% render 'drivestack-product-schema', product: product %}
+
 <div class="ds-product-extras" style="max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 3rem;">
   {% if section.settings.show_trust_badges %}
     {% render 'drivestack-product-trust' %}
