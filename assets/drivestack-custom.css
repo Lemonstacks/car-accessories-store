@@ -342,3 +342,73 @@
 .ds-newsletter__success {
   color: var(--ds-blue-bright); font: 600 1rem/1 var(--ds-font-body);
 }
+
+
+/* --- PRODUCT PAGE DESCRIPTION FIX --- */
+/* Constrain headings within product descriptions so imported content doesn't blow up */
+.product-information [class*="rte"] h1,
+.product-information [class*="rte"] h2,
+.product-information [class*="rte"] h3,
+.product-information [class*="rte"] h4,
+.product-information [class*="rte"] h5,
+.product-information [class*="rte"] h6,
+.drivestack-product-extras-section h1,
+.drivestack-product-extras-section h2,
+.drivestack-product-extras-section h3 {
+  font-family: var(--ds-font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin: 1.25rem 0 0.5rem;
+}
+.product-information [class*="rte"] h1 { font-size: 1.25rem; }
+.product-information [class*="rte"] h2 { font-size: 1.125rem; }
+.product-information [class*="rte"] h3 { font-size: 1rem; }
+.product-information [class*="rte"] h4,
+.product-information [class*="rte"] h5,
+.product-information [class*="rte"] h6 { font-size: 0.875rem; }
+
+.product-information [class*="rte"] p,
+.product-information [class*="rte"] li,
+.product-information [class*="rte"] td {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.product-information [class*="rte"] ul,
+.product-information [class*="rte"] ol {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0;
+}
+
+.product-information [class*="rte"] table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  margin: 1rem 0;
+}
+
+.product-information [class*="rte"] table td,
+.product-information [class*="rte"] table th {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--ds-border);
+  text-align: left;
+}
+
+.product-information [class*="rte"] table th {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Product extras section — tighter spacing */
+.ds-product-extras {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+/* Collection/catalog page — ensure grid looks clean */
+.product-grid .product-card {
+  overflow: hidden;
+}
