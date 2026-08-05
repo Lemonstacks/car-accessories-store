@@ -1,0 +1,191 @@
+{
+  "sections": {
+    "hero": {
+      "type": "section",
+      "blocks": {
+        "eyebrow": {
+          "type": "text",
+          "name": "Eyebrow",
+          "settings": {
+            "text": "<p>Our Story</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "0.6875rem",
+            "line_height": "normal",
+            "letter_spacing": "0.2em",
+            "case": "uppercase",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>Built for Drivers Who Demand More</h1>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "h1",
+            "font": "var(--font-heading--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "description": {
+          "type": "text",
+          "name": "Description",
+          "settings": {
+            "text": "<p>DriveStack was founded on a simple belief: your car deserves better. We source premium automotive accessories that combine engineering precision with modern design, so every drive feels elevated.</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1.0625rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["eyebrow", "heading", "description"],
+      "name": "About Hero",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 20,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-2",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
+    },
+    "values": {
+      "type": "drivestack-trust",
+      "blocks": {
+        "v1": { "type": "trust_item", "settings": { "title": "Curated Selection", "description": "Every product is hand-picked and tested before it reaches our store.", "icon": "quality" } },
+        "v2": { "type": "trust_item", "settings": { "title": "Direct Pricing", "description": "No middlemen markup. Premium quality at fair prices.", "icon": "check" } },
+        "v3": { "type": "trust_item", "settings": { "title": "Global Shipping", "description": "We deliver worldwide with full tracking on every order.", "icon": "shipping" } },
+        "v4": { "type": "trust_item", "settings": { "title": "Customer First", "description": "30-day returns, responsive support, and real humans behind every reply.", "icon": "returns" } }
+      },
+      "block_order": ["v1", "v2", "v3", "v4"],
+      "settings": {
+        "heading": "What We Stand For",
+        "subheading": "The principles behind every product we sell."
+      }
+    },
+    "mission": {
+      "type": "section",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "name": "Mission",
+          "settings": {
+            "text": "<h2>Our Mission</h2><p>We believe your car is more than transportation — it's an extension of who you are. DriveStack exists to help you express that through premium accessories that look great, last long, and install easily.</p><p>From ambient LED lighting to precision-fit organizers, everything in our catalog is chosen with one question: would we put this in our own car?</p><p>If the answer isn't a confident yes, it doesn't make the cut.</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["text"],
+      "name": "Mission Statement",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 20,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    }
+  },
+  "order": ["hero", "values", "mission"]
+}
