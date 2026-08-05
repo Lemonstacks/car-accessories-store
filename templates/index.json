@@ -27,32 +27,28 @@
           "type": "category",
           "settings": {
             "title": "Interior",
-            "link": "",
-            "icon": "interior"
+            "link": ""
           }
         },
         "cat_exterior": {
           "type": "category",
           "settings": {
             "title": "Exterior",
-            "link": "",
-            "icon": "exterior"
+            "link": ""
           }
         },
         "cat_electronics": {
           "type": "category",
           "settings": {
             "title": "Electronics",
-            "link": "",
-            "icon": "electronics"
+            "link": ""
           }
         },
         "cat_detailing": {
           "type": "category",
           "settings": {
             "title": "Detailing",
-            "link": "",
-            "icon": "detailing"
+            "link": ""
           }
         }
       },
