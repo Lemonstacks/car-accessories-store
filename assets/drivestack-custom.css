@@ -412,3 +412,137 @@
 .product-grid .product-card {
   overflow: hidden;
 }
+
+/* --- PRODUCT CARD HOVER POLISH --- */
+product-card {
+  position: relative;
+  overflow: hidden;
+}
+product-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--ds-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ds-speed) var(--ds-ease);
+  z-index: 10;
+  pointer-events: none;
+}
+product-card:hover::after {
+  transform: scaleX(1);
+}
+product-card img {
+  transition: transform var(--ds-speed) var(--ds-ease) !important;
+}
+product-card:hover img {
+  transform: scale(1.03);
+}
+
+/* --- SCROLL-TO-TOP --- */
+.ds-scroll-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem; z-index: 999;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ds-blue); color: var(--ds-white);
+  border: none; cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s, background .2s;
+}
+.ds-scroll-top.visible { opacity: 1; visibility: visible; }
+.ds-scroll-top:hover { background: var(--ds-blue-bright); }
+.ds-scroll-top svg { width: 18px; height: 18px; }
+.ds-scroll-top:focus-visible { outline: 2px solid var(--ds-blue); outline-offset: 4px; }
+
+/* --- 404 PAGE DARK BRANDING --- */
+.main-404-section {
+  background: var(--ds-black) !important;
+}
+.main-404-section h1,
+.main-404-section [class*="heading"] {
+  color: var(--ds-white) !important;
+}
+.main-404-section p,
+.main-404-section [class*="rte"] {
+  color: var(--ds-white-muted) !important;
+}
+.main-404-section .button {
+  background: var(--ds-blue) !important;
+  color: var(--ds-white) !important;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  border-radius: 0 !important;
+  border-color: var(--ds-blue) !important;
+}
+.main-404-section .button:hover {
+  background: var(--ds-blue-bright) !important;
+}
+
+
+/* --- PRODUCT CARD HOVER POLISH --- */
+product-card {
+  position: relative;
+  overflow: hidden;
+}
+product-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--ds-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ds-speed) var(--ds-ease);
+  z-index: 10;
+  pointer-events: none;
+}
+product-card:hover::after {
+  transform: scaleX(1);
+}
+product-card img {
+  transition: transform var(--ds-speed) var(--ds-ease) !important;
+}
+product-card:hover img {
+  transform: scale(1.03);
+}
+
+/* --- SCROLL-TO-TOP --- */
+.ds-scroll-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem; z-index: 999;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ds-blue); color: var(--ds-white);
+  border: none; cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s, background .2s;
+}
+.ds-scroll-top.visible { opacity: 1; visibility: visible; }
+.ds-scroll-top:hover { background: var(--ds-blue-bright); }
+.ds-scroll-top svg { width: 18px; height: 18px; }
+.ds-scroll-top:focus-visible { outline: 2px solid var(--ds-blue); outline-offset: 4px; }
+
+/* --- 404 PAGE DARK --- */
+.main-404-section {
+  background: var(--ds-black) !important;
+}
+.main-404-section h1 {
+  color: var(--ds-white) !important;
+}
+.main-404-section p,
+.main-404-section [class*="rte"] {
+  color: var(--ds-white-muted) !important;
+}
+.main-404-section .button {
+  background: var(--ds-blue) !important;
+  color: var(--ds-white) !important;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  border-radius: 0 !important;
+  border-color: var(--ds-blue) !important;
+}
+.main-404-section .button:hover {
+  background: var(--ds-blue-bright) !important;
+}
