@@ -161,6 +161,7 @@
 ## Shopify Store Details
 
 - **Store URL**: drivestack.myshopify.com
+- **Custom Domain**: drivestack.store
 - **Theme ID**: 164680204544
 - **Theme name in admin**: Whisper
 - **GitHub repo**: github.com/Lemonstacks/car-accessories-store
