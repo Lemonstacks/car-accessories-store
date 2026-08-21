@@ -413,33 +413,6 @@
   overflow: hidden;
 }
 
-/* --- PRODUCT CARD HOVER POLISH --- */
-product-card {
-  position: relative;
-  overflow: hidden;
-}
-product-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--ds-blue);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--ds-speed) var(--ds-ease);
-  z-index: 10;
-  pointer-events: none;
-}
-product-card:hover::after {
-  transform: scaleX(1);
-}
-product-card img {
-  transition: transform var(--ds-speed) var(--ds-ease) !important;
-}
-product-card:hover img {
-  transform: scale(1.03);
-}
-
 /* --- SCROLL-TO-TOP --- */
 .ds-scroll-top {
   position: fixed;
@@ -481,33 +454,6 @@ product-card:hover img {
 }
 
 
-/* --- PRODUCT CARD HOVER POLISH --- */
-product-card {
-  position: relative;
-  overflow: hidden;
-}
-product-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--ds-blue);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--ds-speed) var(--ds-ease);
-  z-index: 10;
-  pointer-events: none;
-}
-product-card:hover::after {
-  transform: scaleX(1);
-}
-product-card img {
-  transition: transform var(--ds-speed) var(--ds-ease) !important;
-}
-product-card:hover img {
-  transform: scale(1.03);
-}
-
 /* --- SCROLL-TO-TOP --- */
 .ds-scroll-top {
   position: fixed;
@@ -548,48 +494,137 @@ product-card:hover img {
 }
 
 
-/* --- PRODUCT CARD PREMIUM STYLING --- */
-/* Card container */
+/* --- PRODUCT CARD PREMIUM STYLING (GLOBAL) --- */
+/* Force dark cards everywhere */
+product-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 !important;
+}
+
 product-card .product-card__content {
   background: var(--ds-carbon) !important;
   border: 1px solid var(--ds-border) !important;
   border-radius: 0 !important;
-  transition: border-color var(--ds-speed) var(--ds-ease);
+  transition: border-color var(--ds-speed) var(--ds-ease), box-shadow var(--ds-speed) var(--ds-ease);
 }
+
 product-card:hover .product-card__content {
-  border-color: rgba(0,123,255,0.3) !important;
+  border-color: rgba(0,123,255,0.35) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
-/* Image area */
-product-card .product-card__content img {
+/* Blue line reveal at bottom of card */
+product-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--ds-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ds-speed) var(--ds-ease);
+  z-index: 10;
+  pointer-events: none;
+}
+product-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Image zoom on hover */
+product-card img {
   border-radius: 0 !important;
+  transition: transform var(--ds-speed) var(--ds-ease), opacity var(--ds-speed) !important;
+}
+product-card:hover img {
+  transform: scale(1.04);
 }
 
-/* Title styling */
-product-card .product-card__content h5,
+/* Title */
+product-card h5,
+product-card [class*="product-title"],
 product-card .product-card__content [class*="rte"] {
   font-family: var(--ds-font-heading) !important;
   font-weight: 600 !important;
   font-size: 0.875rem !important;
   color: var(--ds-white) !important;
   letter-spacing: -0.01em;
-  line-height: 1.3 !important;
+  line-height: 1.35 !important;
+  transition: color 0.2s;
+}
+product-card:hover h5,
+product-card:hover [class*="product-title"] {
+  color: var(--ds-blue-bright) !important;
 }
 
-/* Price styling */
+/* Price */
+product-card [class*="price"],
 product-card .product-card__content [class*="price"] {
   color: var(--ds-blue-bright) !important;
+  font-family: var(--ds-font-body) !important;
   font-weight: 700 !important;
   font-size: 0.9375rem !important;
 }
 
-/* Product list / grid section background */
-.product-list-section,
-[class*="product-list"] {
-  background: var(--ds-black);
+/* Compare-at / sale price */
+product-card [class*="price"] s,
+product-card [class*="price"] del {
+  color: var(--ds-white-muted) !important;
+  font-weight: 400 !important;
+  font-size: 0.8125rem !important;
 }
 
-/* Override scheme-1 on product grid areas to dark */
-.drivestack-hero-section ~ [class*="shopify-section"] .product-card__content {
-  background: var(--ds-carbon) !important;
+/* Quick add button if visible */
+product-card [class*="quick-add"] button,
+product-card .quick-add-button {
+  background: var(--ds-blue) !important;
+  color: var(--ds-white) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font: 700 0.6875rem/1 var(--ds-font-body) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
+product-card [class*="quick-add"] button:hover {
+  background: var(--ds-blue-bright) !important;
+}
+
+/* Force dark background on ALL sections containing product cards */
+.shopify-section:has(product-card) {
+  background: var(--ds-black) !important;
+}
+
+/* Section headings near product grids */
+.shopify-section:has(product-card) h2,
+.shopify-section:has(product-card) h3 {
+  color: var(--ds-white) !important;
+}
+
+/* Product recommendations section on product pages */
+.product-recommendations-section,
+[class*="product-recommendations"] {
+  background: var(--ds-black) !important;
+}
+[class*="product-recommendations"] h3,
+[class*="product-recommendations"] h2 {
+  color: var(--ds-white) !important;
+}
+
+/* Collection page grid */
+.main-collection-section {
+  background: var(--ds-black) !important;
+}
+
+/* Swatches inside cards */
+product-card [class*="swatch"] {
+  border-color: var(--ds-border) !important;
+}
+
+/* Badges (sale, sold out) */
+product-card [class*="badge"] {
+  border-radius: 0 !important;
+  font: 700 0.625rem/1 var(--ds-font-body) !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
