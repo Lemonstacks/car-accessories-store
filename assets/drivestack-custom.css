@@ -577,6 +577,9 @@ product-card [class*="price"] del {
 /* Quick add button if visible */
 product-card [class*="quick-add"] button,
 product-card .quick-add-button,
+product-card .quick-add__button,
+product-card .quick-add__button--choose,
+product-card .add-to-cart-button,
 product-card [class*="quick-add"] a,
 product-card .product-card__content .button,
 product-card .product-card__content [class*="button"] {
@@ -589,8 +592,23 @@ product-card .product-card__content [class*="button"] {
   text-transform: uppercase;
 }
 product-card [class*="quick-add"] button:hover,
+product-card .quick-add__button:hover,
+product-card .add-to-cart-button:hover,
 product-card .product-card__content .button:hover,
 product-card .product-card__content [class*="button"]:hover {
+  background: var(--ds-blue-bright) !important;
+  color: var(--ds-white) !important;
+}
+
+/* Ensure text inside these buttons is always white */
+.quick-add__button,
+.quick-add__button--choose,
+.add-to-cart-button {
+  color: var(--ds-white) !important;
+  background: var(--ds-blue) !important;
+}
+.quick-add__button:hover,
+.add-to-cart-button:hover {
   background: var(--ds-blue-bright) !important;
   color: var(--ds-white) !important;
 }
