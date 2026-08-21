@@ -170,16 +170,31 @@
 
 ## Push Commands
 
+**CRITICAL RULE: Always pull before pushing any JSON template or config file. The Shopify admin/Theme Editor may be ahead of local. Pushing without pulling first will overwrite admin changes (images, settings, etc).**
+
 ```bash
-# Pull from Shopify
-$env:NODE_OPTIONS="--use-system-ca"; shopify theme pull --theme 164680204544 --path . --force
+# ALWAYS pull first before any push
+$env:NODE_OPTIONS="--use-system-ca"; shopify theme pull --theme 164680204544 --path . --force --store drivestack.myshopify.com
 
-# Push to Shopify (live)
-$env:NODE_OPTIONS="--use-system-ca"; echo "y" | shopify theme push --theme 164680204544 --path . --allow-live
+# Then push to Shopify (live)
+$env:NODE_OPTIONS="--use-system-ca"; echo "y" | shopify theme push --theme 164680204544 --path . --allow-live --store drivestack.myshopify.com
 
-# Push specific files only
-$env:NODE_OPTIONS="--use-system-ca"; echo "y" | shopify theme push --theme 164680204544 --path . --allow-live --only assets/drivestack-custom.css
+# Push specific files only (safer)
+$env:NODE_OPTIONS="--use-system-ca"; echo "y" | shopify theme push --theme 164680204544 --path . --allow-live --only assets/drivestack-custom.css --store drivestack.myshopify.com
 ```
+
+**Safe to push without pulling first:**
+- `assets/drivestack-custom.css` (never edited in admin)
+- `snippets/*` (custom snippets not touched by admin)
+- `sections/drivestack-*.liquid` (custom sections)
+
+**MUST pull before pushing:**
+- `templates/index.json` (admin edits images, sections, settings here)
+- `templates/product.json`
+- `templates/collection.json`
+- `config/settings_data.json`
+- `sections/header-group.json`
+- `sections/footer-group.json`
 
 ## Pending / TODO
 
