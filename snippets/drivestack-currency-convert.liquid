@@ -1,0 +1,182 @@
+{% comment %}
+  DriveStack Currency Display Converter
+  Detects non-ZA visitors and converts displayed prices to USD.
+  Checkout still processes in ZAR via Paystack.
+{% endcomment %}
+
+{% if shop.currency == 'ZAR' %}
+<script>
+(function() {
+  var DS_CURRENCY = {
+    base: 'ZAR',
+    target: 'USD',
+    rate: null,
+    symbol: '$',
+    baseSymbol: 'R',
+    isConverted: false,
+    storageKey: 'ds_currency_rate',
+    storageTimeKey: 'ds_currency_time',
+    cacheDuration: 3600000 // 1 hour
+  };
+
+  function isLikelySouthAfrica() {
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      return tz.indexOf('Africa/Johannesburg') !== -1 ||
+             tz.indexOf('Africa/Harare') !== -1 ||
+             tz.indexOf('Africa/Maputo') !== -1;
+    } catch(e) {
+      return true; // default to ZAR if detection fails
+    }
+  }
+
+  function getCachedRate() {
+    try {
+      var rate = localStorage.getItem(DS_CURRENCY.storageKey);
+      var time = localStorage.getItem(DS_CURRENCY.storageTimeKey);
+      if (rate && time && (Date.now() - parseInt(time)) < DS_CURRENCY.cacheDuration) {
+        return parseFloat(rate);
+      }
+    } catch(e) {}
+    return null;
+  }
+
+  function cacheRate(rate) {
+    try {
+      localStorage.setItem(DS_CURRENCY.storageKey, rate.toString());
+      localStorage.setItem(DS_CURRENCY.storageTimeKey, Date.now().toString());
+    } catch(e) {}
+  }
+
+  function fetchRate(callback) {
+    var cached = getCachedRate();
+    if (cached) { callback(cached); return; }
+
+    // Use a free exchange rate API
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/zar.json');
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        try {
+          var data = JSON.parse(xhr.responseText);
+          var rate = data.zar.usd;
+          if (rate && rate > 0) {
+            cacheRate(rate);
+            callback(rate);
+          }
+        } catch(e) {
+          // Fallback rate if API fails
+          callback(0.055);
+        }
+      } else {
+        callback(0.055);
+      }
+    };
+    xhr.onerror = function() { callback(0.055); };
+    xhr.send();
+  }
+
+  function convertPrices(rate) {
+    DS_CURRENCY.rate = rate;
+
+    // Find all price elements on the page
+    var priceSelectors = [
+      '[class*="price"]',
+      '.money',
+      '[data-product-price]'
+    ];
+
+    var elements = document.querySelectorAll(priceSelectors.join(','));
+
+    elements.forEach(function(el) {
+      if (el.dataset.dsConverted) return; // skip already converted
+      if (el.closest('.ds-currency-notice')) return; // skip our own notice
+
+      var text = el.textContent.trim();
+
+      // Match ZAR price patterns: R1,234.56 or R 1234 or ZAR 1234.56
+      var match = text.match(/(?:R|ZAR)\s?([\d,\s]+(?:\.\d{1,2})?)/);
+      if (!match) return;
+
+      var zarAmount = parseFloat(match[1].replace(/[,\s]/g, ''));
+      if (isNaN(zarAmount) || zarAmount === 0) return;
+
+      var usdAmount = (zarAmount * rate).toFixed(2);
+
+      // Replace text content preserving structure
+      el.textContent = DS_CURRENCY.symbol + usdAmount;
+      el.dataset.dsConverted = 'true';
+      el.dataset.dsOriginal = text;
+    });
+
+    DS_CURRENCY.isConverted = true;
+    showNotice();
+  }
+
+  function showNotice() {
+    if (document.querySelector('.ds-currency-notice')) return;
+
+    var notice = document.createElement('div');
+    notice.className = 'ds-currency-notice';
+    notice.innerHTML = '<span>Prices shown in USD. Charged in ZAR at checkout.</span><button aria-label="Close" onclick="this.parentElement.remove()">×</button>';
+    document.body.appendChild(notice);
+  }
+
+  // Observe DOM for dynamically loaded prices (quick add, cart drawer, etc)
+  function observeNewPrices(rate) {
+    if (!window.MutationObserver) return;
+    var observer = new MutationObserver(function() {
+      if (DS_CURRENCY.isConverted) convertPrices(rate);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  // Run
+  if (!isLikelySouthAfrica()) {
+    fetchRate(function(rate) {
+      // Wait for DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          convertPrices(rate);
+          observeNewPrices(rate);
+        });
+      } else {
+        convertPrices(rate);
+        observeNewPrices(rate);
+      }
+    });
+  }
+})();
+</script>
+
+<style>
+.ds-currency-notice {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.625rem 1.5rem;
+  background: var(--ds-surface, #1a1a1a);
+  border-top: 1px solid var(--ds-border, rgba(255,255,255,0.08));
+  font: 400 0.75rem/1 var(--ds-font-body, sans-serif);
+  color: var(--ds-white-muted, rgba(255,255,255,0.5));
+  text-align: center;
+}
+.ds-currency-notice button {
+  background: none;
+  border: none;
+  color: var(--ds-white-muted, rgba(255,255,255,0.5));
+  font-size: 1.125rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}
+.ds-currency-notice button:hover {
+  color: var(--ds-white, #fff);
+}
+</style>
+{% endif %}
