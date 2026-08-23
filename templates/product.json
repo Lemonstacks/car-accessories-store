@@ -602,7 +602,7 @@
         },
         "feat_4": {
           "type": "feature",
-          "settings": { "title": "Fast Shipping", "description": "Ships within 1-2 business days with full tracking.", "icon": "truck" }
+          "settings": { "title": "Tracked Delivery", "description": "Every order ships with full tracking so you always know where your package is.", "icon": "truck" }
         }
       },
       "block_order": ["feat_1", "feat_2", "feat_3", "feat_4"],
