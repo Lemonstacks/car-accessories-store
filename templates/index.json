@@ -208,7 +208,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<h5>{{ closest.product.title }}</h5>",
+                    "text": "<h3>{{ closest.product.title }}</h3>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
