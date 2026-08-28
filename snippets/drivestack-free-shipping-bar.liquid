@@ -1,0 +1,36 @@
+{% comment %}
+  DriveStack Free Shipping Progress Bar
+  Shows honest progress toward the real free-shipping threshold.
+  Threshold is set below and should match the real shipping setting in
+  Settings > Shipping and delivery. No fake urgency.
+
+  Usage: {% render 'drivestack-free-shipping-bar' %}
+{% endcomment %}
+
+{%- liquid
+  assign threshold_rand = 800
+  assign threshold_cents = threshold_rand | times: 100
+  assign current = cart.total_price
+  assign remaining = threshold_cents | minus: current
+  assign pct = current | times: 100.0 | divided_by: threshold_cents
+  if pct > 100
+    assign pct = 100
+  endif
+-%}
+
+{{ 'drivestack-custom.css' | asset_url | stylesheet_tag }}
+<div class="ds-fsb" data-threshold="{{ threshold_cents }}" data-total="{{ current }}">
+  {%- if current >= threshold_cents -%}
+    <p class="ds-fsb__text ds-fsb__text--complete">
+      <span class="ds-fsb__check" aria-hidden="true">✓</span>
+      Your order qualifies for free shipping.
+    </p>
+  {%- else -%}
+    <p class="ds-fsb__text">
+      You're <strong>{{ remaining | money }}</strong> away from free shipping.
+    </p>
+  {%- endif -%}
+  <div class="ds-fsb__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct | round }}">
+    <div class="ds-fsb__fill" style="width: {{ pct }}%;"></div>
+  </div>
+</div>

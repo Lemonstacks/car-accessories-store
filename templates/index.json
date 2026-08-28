@@ -341,40 +341,11 @@
     },
     "drivestack_reviews": {
       "type": "drivestack-reviews",
-      "blocks": {
-        "review_1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "text": "Incredible quality and fast shipping. My car interior looks amazing now.",
-            "author": "Alex M."
-          }
-        },
-        "review_2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "text": "The LED ambient lights completely transformed my driving experience. Worth every penny.",
-            "author": "Sarah K."
-          }
-        },
-        "review_3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "text": "Best car accessories store I've found. Premium materials and great customer service.",
-            "author": "James R."
-          }
-        }
-      },
-      "block_order": [
-        "review_1",
-        "review_2",
-        "review_3"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
-        "heading": "What Our Customers Say",
-        "subheading": "Trusted by thousands of drivers worldwide."
+        "heading": "Customer Reviews",
+        "subheading": "Verified reviews from real DriveStack customers appear here."
       }
     },
     "drivestack_newsletter": {

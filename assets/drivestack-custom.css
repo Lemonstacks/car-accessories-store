@@ -729,3 +729,60 @@ product-card [class*="badge"] {
   .ds-pf__icon { width: 32px; height: 32px; }
   .ds-pf__icon svg { width: 18px; height: 18px; }
 }
+
+
+/* --- FREE SHIPPING PROGRESS BAR (cart drawer) --- */
+.ds-fsb {
+  padding: 1rem 1.25rem;
+  margin: 0 var(--cart-drawer-padding, 1.25rem);
+  background: rgba(0,123,255,0.06);
+  border: 1px solid rgba(0,123,255,0.15);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+.ds-fsb__text {
+  font: 400 0.8125rem/1.4 var(--ds-font-body);
+  color: var(--color-foreground, #111);
+  margin: 0 0 0.625rem;
+  text-align: center;
+}
+.ds-fsb__text strong {
+  color: var(--ds-blue);
+  font-weight: 700;
+}
+.ds-fsb__text--complete {
+  color: #1a8917;
+  font-weight: 600;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.ds-fsb__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: #1a8917;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+.ds-fsb__track {
+  height: 6px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.ds-fsb__text--complete + .ds-fsb__track {
+  display: none;
+}
+.ds-fsb__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ds-blue), var(--ds-blue-bright));
+  border-radius: 100px;
+  transition: width 0.5s var(--ds-ease);
+}
