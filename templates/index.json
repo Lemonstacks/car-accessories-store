@@ -13,6 +13,7 @@
       "type": "drivestack-hero",
       "settings": {
         "image": "shopify://shop_images/samuele-errico-piccarini-FMbWFDiVRPs-unsplash.jpg",
+        "eyebrow": "Premium Auto Accessories",
         "heading": "Upgrade Every Drive.",
         "subheading": "Premium car accessories engineered for style, comfort, and performance.",
         "button_label": "Shop Now",
@@ -27,28 +28,32 @@
           "type": "category",
           "settings": {
             "title": "Interior",
-            "link": ""
+            "link": "shopify://collections/interior",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_01_00_39_PM.png"
           }
         },
         "cat_exterior": {
           "type": "category",
           "settings": {
             "title": "Exterior",
-            "link": ""
+            "link": "shopify://collections/exterior",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_01_03_46_PM.png"
           }
         },
         "cat_electronics": {
           "type": "category",
           "settings": {
             "title": "Electronics",
-            "link": ""
+            "link": "shopify://collections/electronics",
+            "image": "shopify://shop_images/photograph-of-a-modern-car-cockpit-at-night-magnetic-phone-mount-on-dashboard-showing-gps-navigation-blue-dashboard-lighting-illuminating-the-interior-wireless-charger-glowing-clean-m.png"
           }
         },
         "cat_detailing": {
           "type": "category",
           "settings": {
             "title": "Detailing",
-            "link": ""
+            "link": "shopify://collections/detailing",
+            "image": "shopify://shop_images/close-up-photograph-of-a-freshly-detailed-black-car-hood-with-water-beads-on-the-paint-surface-foam-cannon-suds-visible-on-the-side-panel-reflections-of-clouds-in-the-polished-paint-d.png"
           }
         }
       },
