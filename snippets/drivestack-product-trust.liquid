@@ -1,28 +1,8 @@
 {% comment %}
   DriveStack Product Trust Badges
-  Renders honest trust badges + an accurate delivery line on product pages.
-
-  ETHICS: No "fast shipping" claim — real window is 8-30 days imported. We frame the
-  honest advantage instead: tracked delivery + SA-based support.
-  Rationale: transaction/delivery risk drives abandonment [STRONG - MDPI JTAER 2025];
-  trust is the mediator [STRONG]; delivery claims must be accurate [ethics].
-
-  Optional params (all have honest defaults):
-    delivery_badge_label - default "Tracked Delivery"
-    delivery_line        - default honest dispatch/tracking/support line
-    show_delivery_line   - default true
-
+  Renders trust badges on product pages.
   Usage: {% render 'drivestack-product-trust' %}
-     or: {% render 'drivestack-product-trust', delivery_badge_label: 'Tracked Delivery', show_delivery_line: true %}
 {% endcomment %}
-
-{%- liquid
-  assign delivery_badge_label = delivery_badge_label | default: 'Tracked Delivery'
-  assign delivery_line = delivery_line | default: 'Dispatched in 1-2 business days · Delivered with full tracking · Backed by SA-based support.'
-  if show_delivery_line == nil
-    assign show_delivery_line = true
-  endif
--%}
 
 <div class="ds-product-trust">
   <div class="ds-product-trust__item">
@@ -40,7 +20,7 @@
       <circle cx="5.5" cy="18.5" r="2.5"/>
       <circle cx="18.5" cy="18.5" r="2.5"/>
     </svg>
-    <span>{{ delivery_badge_label }}</span>
+    <span>Fast Shipping</span>
   </div>
 
   <div class="ds-product-trust__item">
@@ -58,7 +38,3 @@
     <span>Premium Quality</span>
   </div>
 </div>
-
-{%- if show_delivery_line and delivery_line != blank -%}
-  <p class="ds-product-delivery-line">{{ delivery_line }}</p>
-{%- endif -%}

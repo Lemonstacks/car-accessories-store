@@ -68,6 +68,8 @@
           "background_color": "#ffffff",
           "font_color": "#333333",
           "button_color": "#007bff",
+          "secondary_color": "#ffffff",
+          "ternary_color": "#6A6A6A",
           "button_icon": "chat_bubble",
           "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
