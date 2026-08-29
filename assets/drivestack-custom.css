@@ -751,3 +751,49 @@ product-card [class*="badge"] {
   color: #555; margin: 0.75rem 0 0;
   padding-top: 0.75rem; border-top: 1px solid #eee;
 }
+
+
+/* --- PRODUCT CARD: MOBILE QUICK-ADD ALWAYS VISIBLE + TAP TARGETS --- */
+/* Task 3: on mobile the quick-add must never be hover-only. Force it visible. */
+@media screen and (max-width: 749px) {
+  product-card {
+    --quick-add-mobile-display: flex !important;
+    --quick-add-mobile-opacity: 1 !important;
+  }
+  product-card .quick-add__button {
+    opacity: 1 !important;
+    display: flex !important;
+    /* Task 7: guarantee a 44px minimum tap target on mobile */
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Task 7: card primary link is a clear, single tap target with visible focus */
+product-card .product-card__link:focus-visible {
+  outline: 2px solid var(--ds-blue);
+  outline-offset: 2px;
+}
+
+/* Task 1: enforce a clean square frame regardless of supplier photo dimensions.
+   The image_ratio:square block setting handles the ratio; this guarantees the
+   media fills the frame consistently (object-fit: cover) across mixed photos. */
+product-card .product-card__content img,
+product-card .card-gallery img {
+  object-fit: cover;
+}
+
+
+/* --- REMOVE HEADER HAIRLINE ON SCROLL/STICKY --- */
+/* The header row renders a border-bottom via --color-border when it switches from
+   transparent to sticky. On the dark scheme it shows as a stray white line.
+   Force it off across all header row states. */
+.header__row--top,
+.header__row--top .header__columns,
+.header__row--bottom,
+.header[data-sticky-state='active'] .header__row--top,
+.header[data-sticky-state='active'] .header__row--top .header__columns {
+  border-bottom: 0 !important;
+  --border-bottom-width: 0px !important;
+  --border-bottom-width-mobile: 0px !important;
+}
