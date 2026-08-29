@@ -1,7 +1,12 @@
 {% comment %}
   DriveStack Product Schema (JSON-LD)
-  Outputs structured data for search engines and AI.
-  Renders: Product, Offer, AggregateRating (if reviews exist), Brand.
+  Outputs structured data for search engines and AI shopping agents.
+  Renders: Product, Brand, Offer, and (when present) a fitment additionalProperty.
+
+  ETHICS: No AggregateRating is emitted. It must NEVER be faked — only add ratings
+  once a real reviews source (e.g. Judge.me metafields) exists, guarded on presence.
+  Fitment is read from product.metafields.custom.fitment and only included when set.
+  Rationale: complete structured data -> agentic surfaceability [SOFT]; no fake ratings [ethics].
 {% endcomment %}
 
 {% if product %}
@@ -26,6 +31,18 @@
   {% endif %}
   {% if product.selected_or_first_available_variant.barcode != blank %}
     "gtin": {{ product.selected_or_first_available_variant.barcode | json }},
+  {% endif %}
+  {%- assign ds_fitment = product.metafields.custom.fitment.value | default: product.metafields.custom.fitment -%}
+  {% if ds_fitment != blank %}
+    "isAccessoryOrSparePartFor": {
+      "@type": "Product",
+      "name": {{ ds_fitment | json }}
+    },
+    "additionalProperty": {
+      "@type": "PropertyValue",
+      "name": "Compatibility",
+      "value": {{ ds_fitment | json }}
+    },
   {% endif %}
   "offers": {
     "@type": "{% if product.variants.size > 1 %}AggregateOffer{% else %}Offer{% endif %}",
