@@ -413,6 +413,74 @@
   overflow: hidden;
 }
 
+/* --- PRODUCT CARD 2026 FIXES (square image, mobile quick-add, rating slot) --- */
+
+/* 1. Force a consistent SQUARE image so the grid is even.
+   The live card renders a tall portrait image; 1:1 + cover crops it uniformly. */
+product-card .product-card__content .product-media,
+product-card .product-card__content .card-gallery,
+product-card .product-card__content slideshow-component,
+product-card .product-card__content .media,
+product-card .product-card__content [class*="media"] {
+  aspect-ratio: 1 / 1 !important;
+  overflow: hidden !important;
+}
+product-card .product-card__content img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* 2. Hide the glitchy card-level carousel arrows + thumbnail artifacts.
+   (The rainbow/broken thumbs and stray circle are card slideshow controls.)
+   Keep gallery controls on the PRODUCT PAGE — only suppress them on grid cards. */
+product-card slideshow-arrows,
+product-card .slideshow-arrows,
+product-card .slideshow-control,
+product-card [class*="slideshow-arrow"],
+product-card .slideshow-thumbnails,
+product-card [class*="thumbnail"] {
+  display: none !important;
+}
+
+/* 3. Mobile-visible quick-add: ~45% of SA traffic is mobile; hover-only hides it.
+   On small screens always show the quick-add / choose-options action. */
+@media screen and (max-width: 749px) {
+  product-card .product-card__content [class*="quick-add"],
+  product-card .product-card__content .quick-add,
+  product-card .product-card__content .add-to-cart-button {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
+
+/* 4. Title clamp to 2 lines so every card aligns at the price row. */
+product-card h5,
+product-card [class*="product-title"] {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em; /* reserve 2 lines so prices line up across the grid */
+}
+
+/* 5. Rating slot — styled for when the reviews app (Judge.me) is live.
+   Renders nothing until a real rating widget is injected; never fake stars. */
+product-card .product-card__rating,
+product-card [class*="jdgm-prev-badge"],
+product-card [class*="shopify-product-reviews-badge"] {
+  display: block;
+  margin-block: 0.25rem 0;
+  font-size: 0.8125rem;
+  color: var(--ds-blue-bright);
+}
+product-card .product-card__rating:empty {
+  display: none;
+}
+
 /* --- SCROLL-TO-TOP --- */
 /* Positioned bottom-LEFT so it never collides with the chat widget (bottom-right). */
 .ds-scroll-top {
@@ -797,3 +865,60 @@ product-card .card-gallery img {
   --border-bottom-width: 0px !important;
   --border-bottom-width-mobile: 0px !important;
 }
+
+
+/* ==========================================================================
+   LIGHT SECTION ACCENTS — break up the all-dark layout with white sections.
+   Trust and Reviews flip to a clean white background with dark text so the
+   homepage reads: dark hero -> light trust -> dark grid -> light reviews -> dark.
+   ========================================================================== */
+
+/* --- TRUST: light variant --- */
+.ds-trust {
+  background: var(--ds-white);
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+}
+.ds-trust__header {
+  border-right: 1px solid #ececec;
+}
+.ds-trust__title { color: var(--ds-black); }
+.ds-trust__subtitle { color: #666; }
+.ds-trust-item { border-right: 1px solid #ececec; }
+.ds-trust-item__icon { color: var(--ds-blue); }
+.ds-trust-item__title { color: var(--ds-black); }
+.ds-trust-item__description { color: #666; }
+@media (max-width: 989px) {
+  .ds-trust__header { border-right: none; border-bottom: 1px solid #ececec; }
+  .ds-trust-item { border-bottom: 1px solid #ececec; }
+}
+
+/* --- REVIEWS: light variant --- */
+.ds-reviews {
+  background: var(--ds-white);
+}
+.ds-reviews__title { color: var(--ds-black); }
+.ds-reviews__subtitle { color: #666; }
+.ds-review-card {
+  background: #f7f7f8;
+  border-left: 3px solid var(--ds-blue);
+}
+.ds-review-card__text { color: #333; }
+.ds-review-card__author { color: #888; }
+
+/* --- CATEGORIES header: keep dark section but add a subtle white top hairline
+   so the transition from the hero reads cleaner --- */
+.ds-categories {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* --- NEWSLETTER: lighten from near-black carbon to a softer dark so the page
+   doesn't end on pure black; keeps text light but feels less heavy --- */
+.ds-newsletter {
+  background: #17171a;
+}
+
+/* --- Product card titles/prices need dark text when card sits on light grid.
+   Best Sellers grid stays dark, so no change there. But product recommendation
+   and any light-scheme product grids get readable text. --- */
+.shopify-section:not(:has(product-card)) { }
