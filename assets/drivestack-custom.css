@@ -1055,3 +1055,52 @@ product-card .product-card__rating:empty,
 product-card [class*="jdgm-prev-badge"]:empty {
   display: none !important;
 }
+
+
+/* ==========================================================================
+   ANNOUNCEMENT BAR — TYPEWRITER EFFECT
+   Types each announcement phrase out with a blinking caret, then cycles.
+   Purely presentational; the static slides remain as the accessible source
+   (and are shown as-is under prefers-reduced-motion).
+   ========================================================================== */
+.ds-typewriter {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 100%;
+  min-height: 1em;
+  font: inherit;
+  color: inherit;
+  letter-spacing: 0.02em;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* Shown once JS activates the effect (or when rendering the static fallback). */
+.ds-typewriter--active,
+.ds-typewriter--static {
+  display: inline-flex;
+}
+.ds-typewriter__text {
+  font: inherit;
+  color: inherit;
+}
+/* Blinking caret — a thin blue bar that follows the typed text. */
+.ds-typewriter__caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 3px;
+  background: var(--ds-blue, #007BFF);
+  transform: translateY(2px);
+  animation: ds-caret-blink 1s steps(1, end) infinite;
+}
+.ds-typewriter--static .ds-typewriter__caret { display: none; }
+@keyframes ds-caret-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-typewriter__caret { animation: none; opacity: 0; }
+}
