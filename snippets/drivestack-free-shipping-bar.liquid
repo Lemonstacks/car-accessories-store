@@ -1,8 +1,15 @@
 {% comment %}
   DriveStack Free Shipping Progress Bar
-  Shows honest progress toward the real free-shipping threshold.
-  Threshold is set below and should match the real shipping setting in
-  Settings > Shipping and delivery. No fake urgency.
+  Shows honest progress toward the free-shipping threshold.
+
+  IMPORTANT (ethics/accuracy): The R800 threshold below MUST match a real
+  "free shipping over R800" rate in Settings > Shipping and delivery. As of the
+  last audit NO shipping rates were configured in Shopify, so this bar would
+  promise something checkout does not honour. Do NOT show this bar until the
+  free-shipping-over-R800 rate is created in admin. No fake urgency, no dark patterns.
+
+  Threshold: change threshold_rand below if the real rule differs.
+  Rationale: AOV lift via threshold nudge [MEDIUM]; accurate claims [ethics].
 
   Usage: {% render 'drivestack-free-shipping-bar' %}
 {% endcomment %}

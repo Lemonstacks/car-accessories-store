@@ -341,8 +341,6 @@
     },
     "drivestack_reviews": {
       "type": "drivestack-reviews",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "heading": "Customer Reviews",
         "subheading": "Verified reviews from real DriveStack customers appear here."

@@ -1,8 +1,24 @@
 {% comment %}
-  DriveStack Reviews — Dark bg, blue left-border cards, large quote marks
+  DriveStack Reviews — Dark bg, blue left-border cards, large quote marks.
+
+  ETHICS: This section must only ever display REAL, attributable customer reviews.
+  Testimonial blocks are added manually by the merchant with genuine content, or the
+  Judge.me app block renders verified reviews. If neither is present, the section
+  renders nothing (no empty "What customers say" shell).
+  Rationale: eWOM -> purchase intention [STRONG]; no invented testimonials [ethics].
 {% endcomment %}
 {{ 'drivestack-custom.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign testimonial_blocks = section.blocks | where: "type", "testimonial"
+  assign app_blocks = section.blocks | where: "type", "@app"
+  assign has_content = false
+  if testimonial_blocks.size > 0 or app_blocks.size > 0
+    assign has_content = true
+  endif
+-%}
+
+{%- if has_content -%}
 <section class="ds-reviews" aria-label="{{ section.settings.heading | default: 'Reviews' | escape }}">
   <div class="ds-reviews__container">
     {% if section.settings.heading != blank or section.settings.subheading != blank %}
@@ -16,7 +32,6 @@
       </div>
     {% endif %}
 
-    {% assign testimonial_blocks = section.blocks | where: "type", "testimonial" %}
     {% if testimonial_blocks.size > 0 %}
       <div class="ds-reviews__grid">
         {% for block in testimonial_blocks %}
@@ -41,7 +56,6 @@
       </div>
     {% endif %}
 
-    {% assign app_blocks = section.blocks | where: "type", "@app" %}
     {% if app_blocks.size > 0 %}
       <div class="ds-reviews__app-container">
         {% for block in app_blocks %}{% render block %}{% endfor %}
@@ -49,6 +63,7 @@
     {% endif %}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
@@ -56,24 +71,23 @@
   "tag": "section",
   "class": "drivestack-reviews-section",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "What Our Customers Say" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Trusted by thousands of drivers worldwide." }
+    {
+      "type": "paragraph",
+      "content": "Only add REAL, attributable customer reviews. Add a Testimonial block with a genuine quote and name, or add the Judge.me app block to show verified reviews. With no blocks, this section stays hidden."
+    },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Customer Reviews" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "" }
   ],
   "blocks": [
     { "type": "testimonial", "name": "Testimonial", "limit": 6, "settings": [
       { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-      { "type": "textarea", "id": "text", "label": "Review text", "default": "Incredible quality and fast shipping. My car interior looks amazing now." },
-      { "type": "text", "id": "author", "label": "Author", "default": "Alex M." }
+      { "type": "textarea", "id": "text", "label": "Review text (real, verbatim)", "default": "" },
+      { "type": "text", "id": "author", "label": "Author (real customer name/initial)", "default": "" }
     ]},
     { "type": "@app" }
   ],
   "presets": [{
-    "name": "DriveStack Reviews",
-    "blocks": [
-      { "type": "testimonial", "settings": { "rating": 5, "text": "Incredible quality and fast shipping. My car interior looks amazing now.", "author": "Alex M." } },
-      { "type": "testimonial", "settings": { "rating": 5, "text": "The LED ambient lights completely transformed my driving experience. Worth every penny.", "author": "Sarah K." } },
-      { "type": "testimonial", "settings": { "rating": 5, "text": "Best car accessories store I've found. Premium materials and great customer service.", "author": "James R." } }
-    ]
+    "name": "DriveStack Reviews"
   }]
 }
 {% endschema %}

@@ -574,44 +574,10 @@ product-card [class*="price"] del {
   font-size: 0.8125rem !important;
 }
 
-/* Quick add button if visible */
-product-card [class*="quick-add"] button,
-product-card .quick-add-button,
-product-card .quick-add__button,
-product-card .quick-add__button--choose,
-product-card .add-to-cart-button,
-product-card [class*="quick-add"] a,
-product-card .product-card__content .button,
-product-card .product-card__content [class*="button"] {
-  background: var(--ds-blue) !important;
-  color: var(--ds-white) !important;
-  border: none !important;
-  border-radius: 0 !important;
-  font: 700 0.6875rem/1 var(--ds-font-body) !important;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-product-card [class*="quick-add"] button:hover,
-product-card .quick-add__button:hover,
-product-card .add-to-cart-button:hover,
-product-card .product-card__content .button:hover,
-product-card .product-card__content [class*="button"]:hover {
-  background: var(--ds-blue-bright) !important;
-  color: var(--ds-white) !important;
-}
-
-/* Ensure text inside these buttons is always white */
-.quick-add__button,
-.quick-add__button--choose,
-.add-to-cart-button {
-  color: var(--ds-white) !important;
-  background: var(--ds-blue) !important;
-}
-.quick-add__button:hover,
-.add-to-cart-button:hover {
-  background: var(--ds-blue-bright) !important;
-  color: var(--ds-white) !important;
-}
+/* Quick add button — LEAVE THE THEME'S NATIVE STYLING ALONE.
+   The card's floating quick-add is a circular white pill with a dark icon inside
+   (inner .add-to-cart-text span has its own background). Overriding it broke the
+   icon (white blob). We intentionally do NOT restyle it here. */
 
 /* Force dark background on ALL sections containing product cards */
 .shopify-section:has(product-card) {
@@ -785,4 +751,45 @@ product-card [class*="badge"] {
   background: linear-gradient(90deg, var(--ds-blue), var(--ds-blue-bright));
   border-radius: 100px;
   transition: width 0.5s var(--ds-ease);
+}
+
+
+/* --- FITMENT / COMPATIBILITY ROW --- */
+.ds-fitment {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  margin: 1rem 0;
+  background: rgba(0,123,255,0.06);
+  border: 1px solid rgba(0,123,255,0.15);
+  border-radius: 6px;
+}
+.ds-fitment__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--ds-blue);
+  margin-top: 1px;
+}
+.ds-fitment__icon svg { width: 100%; height: 100%; }
+.ds-fitment__body { display: flex; flex-direction: column; gap: 0.15rem; }
+.ds-fitment__label {
+  font: 700 0.6875rem/1 var(--ds-font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ds-blue);
+}
+.ds-fitment__value {
+  font: 400 0.875rem/1.5 var(--ds-font-body);
+  color: #333;
+}
+
+/* --- HONEST DELIVERY LINE (product page) --- */
+.ds-product-delivery-line {
+  font: 400 0.8125rem/1.5 var(--ds-font-body);
+  color: #555;
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eee;
 }

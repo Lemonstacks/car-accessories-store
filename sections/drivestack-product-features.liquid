@@ -74,8 +74,12 @@
       "name": "Feature",
       "limit": 8,
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Feature Title" },
-        { "type": "textarea", "id": "description", "label": "Description", "default": "Short description of this feature." },
+        {
+          "type": "paragraph",
+          "content": "Enter a feature that is TRUE for this specific product. Do not claim universal fit or tool-free install unless it genuinely applies. Pull wording from the product's real specifications."
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "" },
         { "type": "select", "id": "icon", "label": "Icon", "default": "bolt", "options": [
           { "value": "bolt", "label": "Bolt / Power" },
           { "value": "shield", "label": "Shield / Protection" },
@@ -93,12 +97,7 @@
   ],
   "presets": [
     {
-      "name": "Product Features",
-      "blocks": [
-        { "type": "feature", "settings": { "title": "Premium Build", "description": "Engineered with high-grade materials for lasting performance.", "icon": "star" } },
-        { "type": "feature", "settings": { "title": "Easy Install", "description": "No tools or wiring needed. Plug in and go.", "icon": "tool" } },
-        { "type": "feature", "settings": { "title": "Universal Fit", "description": "Designed to work with any vehicle make or model.", "icon": "check" } }
-      ]
+      "name": "Product Features"
     }
   ],
   "templates": ["product"]
