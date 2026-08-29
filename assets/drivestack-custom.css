@@ -413,74 +413,6 @@
   overflow: hidden;
 }
 
-/* --- PRODUCT CARD 2026 FIXES (square image, mobile quick-add, rating slot) --- */
-
-/* 1. Force a consistent SQUARE image so the grid is even.
-   The live card renders a tall portrait image; 1:1 + cover crops it uniformly. */
-product-card .product-card__content .product-media,
-product-card .product-card__content .card-gallery,
-product-card .product-card__content slideshow-component,
-product-card .product-card__content .media,
-product-card .product-card__content [class*="media"] {
-  aspect-ratio: 1 / 1 !important;
-  overflow: hidden !important;
-}
-product-card .product-card__content img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-}
-
-/* 2. Hide the glitchy card-level carousel arrows + thumbnail artifacts.
-   (The rainbow/broken thumbs and stray circle are card slideshow controls.)
-   Keep gallery controls on the PRODUCT PAGE — only suppress them on grid cards. */
-product-card slideshow-arrows,
-product-card .slideshow-arrows,
-product-card .slideshow-control,
-product-card [class*="slideshow-arrow"],
-product-card .slideshow-thumbnails,
-product-card [class*="thumbnail"] {
-  display: none !important;
-}
-
-/* 3. Mobile-visible quick-add: ~45% of SA traffic is mobile; hover-only hides it.
-   On small screens always show the quick-add / choose-options action. */
-@media screen and (max-width: 749px) {
-  product-card .product-card__content [class*="quick-add"],
-  product-card .product-card__content .quick-add,
-  product-card .product-card__content .add-to-cart-button {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-  }
-}
-
-/* 4. Title clamp to 2 lines so every card aligns at the price row. */
-product-card h5,
-product-card [class*="product-title"] {
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 2.4em; /* reserve 2 lines so prices line up across the grid */
-}
-
-/* 5. Rating slot — styled for when the reviews app (Judge.me) is live.
-   Renders nothing until a real rating widget is injected; never fake stars. */
-product-card .product-card__rating,
-product-card [class*="jdgm-prev-badge"],
-product-card [class*="shopify-product-reviews-badge"] {
-  display: block;
-  margin-block: 0.25rem 0;
-  font-size: 0.8125rem;
-  color: var(--ds-blue-bright);
-}
-product-card .product-card__rating:empty {
-  display: none;
-}
-
 /* --- SCROLL-TO-TOP --- */
 /* Positioned bottom-LEFT so it never collides with the chat widget (bottom-right). */
 .ds-scroll-top {
@@ -873,24 +805,24 @@ product-card .card-gallery img {
    homepage reads: dark hero -> light trust -> dark grid -> light reviews -> dark.
    ========================================================================== */
 
-/* --- TRUST: light variant --- */
+/* --- TRUST: reverted to dark (matches original carbon section) --- */
 .ds-trust {
-  background: var(--ds-white);
-  border-top: 1px solid #ececec;
-  border-bottom: 1px solid #ececec;
+  background: var(--ds-carbon);
+  border-top: 1px solid var(--ds-border);
+  border-bottom: 1px solid var(--ds-border);
 }
 .ds-trust__header {
-  border-right: 1px solid #ececec;
+  border-right: 1px solid var(--ds-border);
 }
-.ds-trust__title { color: var(--ds-black); }
-.ds-trust__subtitle { color: #666; }
-.ds-trust-item { border-right: 1px solid #ececec; }
+.ds-trust__title { color: var(--ds-white); }
+.ds-trust__subtitle { color: var(--ds-white-muted); }
+.ds-trust-item { border-right: 1px solid var(--ds-border); }
 .ds-trust-item__icon { color: var(--ds-blue); }
-.ds-trust-item__title { color: var(--ds-black); }
-.ds-trust-item__description { color: #666; }
+.ds-trust-item__title { color: var(--ds-white); }
+.ds-trust-item__description { color: var(--ds-white-muted); }
 @media (max-width: 989px) {
-  .ds-trust__header { border-right: none; border-bottom: 1px solid #ececec; }
-  .ds-trust-item { border-bottom: 1px solid #ececec; }
+  .ds-trust__header { border-right: none; border-bottom: 1px solid var(--ds-border); }
+  .ds-trust-item { border-bottom: 1px solid var(--ds-border); }
 }
 
 /* --- REVIEWS: light variant --- */
@@ -922,3 +854,157 @@ product-card .card-gallery img {
    Best Sellers grid stays dark, so no change there. But product recommendation
    and any light-scheme product grids get readable text. --- */
 .shopify-section:not(:has(product-card)) { }
+
+
+/* ==========================================================================
+   PRODUCT CARD POLISH (2026) — consolidated final overrides.
+   Appended last so it wins the cascade over the earlier accumulated blocks.
+   Goals: even square images, tidy content padding, clear title/price
+   hierarchy, refined hover, mobile-safe quick-add, honest rating slot.
+   ========================================================================== */
+
+/* Card shell: subtle lift, crisp edge, smooth transitions */
+product-card .product-card__content {
+  background: var(--ds-carbon) !important;
+  border: 1px solid var(--ds-border) !important;
+  border-radius: 0 !important;
+  padding: 0 0 1rem !important;
+  transition: border-color var(--ds-speed) var(--ds-ease),
+              box-shadow var(--ds-speed) var(--ds-ease),
+              transform var(--ds-speed) var(--ds-ease);
+}
+product-card:hover .product-card__content {
+  border-color: rgba(0,123,255,0.4) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  transform: translateY(-2px);
+}
+
+/* Square, uniform image frame across mixed supplier photos */
+product-card .product-media,
+product-card .card-gallery,
+product-card slideshow-component,
+product-card [class*="media"] {
+  aspect-ratio: 1 / 1 !important;
+  overflow: hidden !important;
+  background: #0f0f0f;
+}
+product-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Breathing room for the text block under the image */
+product-card .product-card__content > *:not(.product-media):not(.card-gallery):not(slideshow-component) {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Title: clean, two-line clamp so prices align across the row */
+product-card h5,
+product-card [class*="product-title"] {
+  font-family: var(--ds-font-heading) !important;
+  font-weight: 600 !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.35 !important;
+  color: var(--ds-white) !important;
+  letter-spacing: -0.01em !important;
+  margin-top: 0.85rem !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em;
+  transition: color 0.2s;
+}
+product-card:hover h5,
+product-card:hover [class*="product-title"] {
+  color: var(--ds-blue-bright) !important;
+}
+
+/* Price hierarchy: current price bold blue, compare-at muted strike */
+product-card [class*="price"] {
+  font-family: var(--ds-font-body) !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  color: var(--ds-white) !important;
+  margin-top: 0.35rem !important;
+}
+product-card [class*="price"] s,
+product-card [class*="price"] del {
+  color: var(--ds-white-muted) !important;
+  font-weight: 400 !important;
+  font-size: 0.8125rem !important;
+  margin-left: 0.4rem;
+}
+/* Sale price emphasised in blue when a compare-at strike is present */
+product-card [class*="price"]:has(s) ,
+product-card [class*="price--on-sale"] {
+  color: var(--ds-blue-bright) !important;
+}
+
+/* Sale badge: sharp, uppercase, top-left */
+product-card [class*="badge"] {
+  border-radius: 0 !important;
+  font: 700 0.625rem/1 var(--ds-font-body) !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ds-blue) !important;
+  color: var(--ds-white) !important;
+  padding: 0.35rem 0.55rem !important;
+}
+
+/* Quick-add: full-width, sits near price, blue */
+product-card .quick-add,
+product-card [class*="quick-add"] {
+  margin-top: 0.75rem !important;
+}
+product-card .quick-add__button,
+product-card [class*="quick-add"] button,
+product-card [class*="quick-add"] a {
+  background: var(--ds-blue) !important;
+  color: var(--ds-white) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font: 700 0.6875rem/1 var(--ds-font-body) !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  min-height: 44px;
+}
+product-card .quick-add__button:hover,
+product-card [class*="quick-add"] button:hover {
+  background: var(--ds-blue-bright) !important;
+}
+
+/* Mobile: quick-add always visible (never hover-only) */
+@media screen and (max-width: 749px) {
+  product-card .quick-add,
+  product-card [class*="quick-add"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: block !important;
+  }
+}
+
+/* Blue underline reveal on hover */
+product-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--ds-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ds-speed) var(--ds-ease);
+  z-index: 10;
+  pointer-events: none;
+}
+product-card:hover::after { transform: scaleX(1); }
+
+/* Rating slot: only renders when a real widget is injected; never fake stars */
+product-card .product-card__rating:empty,
+product-card [class*="jdgm-prev-badge"]:empty {
+  display: none !important;
+}
