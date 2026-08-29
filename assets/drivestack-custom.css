@@ -879,46 +879,53 @@ product-card:hover .product-card__content {
   transform: translateY(-2px);
 }
 
-/* Square, uniform image frame across mixed supplier photos */
-product-card .product-media,
+/* Square, uniform image frame — scope ONLY to the real gallery/slideshow.
+   Do NOT target [class*="media"] broadly: it matches group-block__media-wrapper
+   (an empty layout container) and turns it into a big empty black square. */
 product-card .card-gallery,
-product-card slideshow-component,
-product-card [class*="media"] {
+product-card .card-gallery slideshow-component {
   aspect-ratio: 1 / 1 !important;
   overflow: hidden !important;
   background: #0f0f0f;
 }
-product-card img {
+/* Make the gallery the positioning context so the absolutely-positioned
+   quick-add pins to the bottom-right of the IMAGE, not the whole card. */
+product-card .card-gallery {
+  position: relative !important;
+}
+product-card .card-gallery img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
   object-position: center !important;
 }
 
-/* Breathing room for the text block under the image */
-product-card .product-card__content > *:not(.product-media):not(.card-gallery):not(slideshow-component) {
-  padding-left: 1rem;
-  padding-right: 1rem;
+/* Collapse the empty duplicate media wrapper the block layout injects under
+   the text (it renders as a tall black void beneath title/price). */
+product-card .group-block__media-wrapper:empty,
+product-card .group-block__media-wrapper:not(:has(img)):not(:has(svg)) {
+  display: none !important;
 }
 
-/* Title: clean, two-line clamp so prices align across the row */
-product-card h5,
+/* Title: clean hierarchy in white. Horizon renders the visible card title as a
+   text-block with a dynamic "...__title" class wrapping an h3. Target both the
+   title text-block and any heading inside the card, and force readable white. */
+/* Title color is set at the BLOCK level (color:#ffffff in the template JSON),
+   so no dynamic-class CSS is needed. Only styling + hover accent live here,
+   using stable selectors ([class*="__title"] for homepage text-block titles,
+   product-title for the collection block). */
+product-card [class*="__title"],
+product-card [class*="__title"] :where(h1,h2,h3,h4),
 product-card [class*="product-title"] {
   font-family: var(--ds-font-heading) !important;
   font-weight: 600 !important;
   font-size: 0.9375rem !important;
   line-height: 1.35 !important;
-  color: var(--ds-white) !important;
   letter-spacing: -0.01em !important;
-  margin-top: 0.85rem !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 2.5em;
   transition: color 0.2s;
 }
-product-card:hover h5,
+product-card:hover [class*="__title"],
+product-card:hover [class*="__title"] :where(h1,h2,h3,h4),
 product-card:hover [class*="product-title"] {
   color: var(--ds-blue-bright) !important;
 }
@@ -955,32 +962,72 @@ product-card [class*="badge"] {
   padding: 0.35rem 0.55rem !important;
 }
 
-/* Quick-add: full-width, sits near price, blue */
-product-card .quick-add,
-product-card [class*="quick-add"] {
-  margin-top: 0.75rem !important;
-}
-product-card .quick-add__button,
-product-card [class*="quick-add"] button,
-product-card [class*="quick-add"] a {
+/* Quick-add: the theme pins the button ABSOLUTELY over the bottom of the image.
+   Respect that positioning (do NOT force width:100% or position:static — that
+   creates an ugly full-width blue band across the photo). Instead keep it a
+   compact pill tucked in the bottom-right corner of the image, styled blue.
+   Stable selectors only: quick-add-component + .quick-add__button. */
+product-card .quick-add__button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 0 !important;
   background: var(--ds-blue) !important;
   color: var(--ds-white) !important;
   border: none !important;
   border-radius: 0 !important;
-  font: 700 0.6875rem/1 var(--ds-font-body) !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase !important;
-  min-height: 44px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
 }
-product-card .quick-add__button:hover,
-product-card [class*="quick-add"] button:hover {
+product-card .quick-add__button:hover {
   background: var(--ds-blue-bright) !important;
+}
+/* Position the quick-add neatly at the image's bottom-right corner */
+product-card quick-add-component,
+product-card .quick-add {
+  position: absolute !important;
+  right: 0.5rem !important;
+  bottom: 0.5rem !important;
+  left: auto !important;
+  width: auto !important;
+  z-index: 5 !important;
+}
+/* Multi-variant cards render BOTH an "--add" (collapsed, unused) and a
+   "--choose options" button. Hide the collapsed add button so no stray
+   icon/circle shows; the choose-options button is the real action. */
+product-card .quick-add__product-form-component:has(.quick-add__button--choose) .quick-add__button--add {
+  display: none !important;
+}
+/* The inner .add-to-cart-text span carries a white background from the theme
+   (that was the "white blob"). Neutralise it and show a clean white icon. */
+product-card .quick-add__button .add-to-cart-text {
+  background: transparent !important;
+  color: var(--ds-white) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  gap: 0 !important;
+  font-size: 0 !important; /* hide the "Choose"/"Add" label; keep the icon only */
+}
+product-card .quick-add__button .svg-wrapper,
+product-card .quick-add__button .add-to-cart-icon,
+product-card .quick-add__button svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: var(--ds-white) !important;
+  --icon-stroke-width: 2;
 }
 
 /* Mobile: quick-add always visible (never hover-only) */
 @media screen and (max-width: 749px) {
-  product-card .quick-add,
-  product-card [class*="quick-add"] {
+  product-card quick-add-component,
+  product-card .quick-add {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;

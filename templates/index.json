@@ -158,7 +158,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "square",
+                "image_ratio": "portrait",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -213,7 +213,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<h3>{{ closest.product.title | split: '|' | first | strip }}</h3>",
+                    "text": "<h3>{{ closest.product.title }}</h3>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -224,7 +224,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "color": "",
+                    "color": "#ffffff",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -341,8 +341,6 @@
     },
     "drivestack_reviews": {
       "type": "drivestack-reviews",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "heading": "Customer Reviews",
         "subheading": ""
