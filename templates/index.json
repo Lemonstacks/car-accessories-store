@@ -13,7 +13,6 @@
       "type": "drivestack-hero",
       "settings": {
         "image": "shopify://shop_images/samuele-errico-piccarini-FMbWFDiVRPs-unsplash.jpg",
-        "eyebrow": "Premium Auto Accessories",
         "heading": "Upgrade Every Drive.",
         "subheading": "Premium car accessories engineered for style, comfort, and performance.",
         "button_label": "Shop Now",
@@ -28,32 +27,28 @@
           "type": "category",
           "settings": {
             "title": "Interior",
-            "link": "shopify://collections/interior",
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_01_00_39_PM.png"
+            "link": ""
           }
         },
         "cat_exterior": {
           "type": "category",
           "settings": {
             "title": "Exterior",
-            "link": "shopify://collections/exterior",
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_01_03_46_PM.png"
+            "link": ""
           }
         },
         "cat_electronics": {
           "type": "category",
           "settings": {
             "title": "Electronics",
-            "link": "shopify://collections/electronics",
-            "image": "shopify://shop_images/photograph-of-a-modern-car-cockpit-at-night-magnetic-phone-mount-on-dashboard-showing-gps-navigation-blue-dashboard-lighting-illuminating-the-interior-wireless-charger-glowing-clean-m.png"
+            "link": ""
           }
         },
         "cat_detailing": {
           "type": "category",
           "settings": {
             "title": "Detailing",
-            "link": "shopify://collections/detailing",
-            "image": "shopify://shop_images/close-up-photograph-of-a-freshly-detailed-black-car-hood-with-water-beads-on-the-paint-surface-foam-cannon-suds-visible-on-the-side-panel-reflections-of-clouds-in-the-polished-paint-d.png"
+            "link": ""
           }
         }
       },
@@ -224,7 +219,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "color": "#ffffff",
+                    "color": "",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -314,8 +309,8 @@
         "trust_shipping": {
           "type": "trust_item",
           "settings": {
-            "title": "Tracked Delivery",
-            "description": "Every order ships with full tracking and SA-based support.",
+            "title": "Fast Shipping",
+            "description": "Quick delivery right to your door.",
             "icon": "shipping"
           }
         },
@@ -341,9 +336,40 @@
     },
     "drivestack_reviews": {
       "type": "drivestack-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Incredible quality and fast shipping. My car interior looks amazing now.",
+            "author": "Alex M."
+          }
+        },
+        "review_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "The LED ambient lights completely transformed my driving experience. Worth every penny.",
+            "author": "Sarah K."
+          }
+        },
+        "review_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Best car accessories store I've found. Premium materials and great customer service.",
+            "author": "James R."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
       "settings": {
-        "heading": "Customer Reviews",
-        "subheading": ""
+        "heading": "What Our Customers Say",
+        "subheading": "Trusted by thousands of drivers worldwide."
       }
     },
     "drivestack_newsletter": {

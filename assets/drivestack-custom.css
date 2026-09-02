@@ -414,10 +414,50 @@
 }
 
 /* --- SCROLL-TO-TOP --- */
-/* Positioned bottom-LEFT so it never collides with the chat widget (bottom-right). */
 .ds-scroll-top {
   position: fixed;
-  bottom: 1.5rem; left: 1.5rem; z-index: 900;
+  bottom: 2rem; right: 2rem; z-index: 999;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ds-blue); color: var(--ds-white);
+  border: none; cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s, background .2s;
+}
+.ds-scroll-top.visible { opacity: 1; visibility: visible; }
+.ds-scroll-top:hover { background: var(--ds-blue-bright); }
+.ds-scroll-top svg { width: 18px; height: 18px; }
+.ds-scroll-top:focus-visible { outline: 2px solid var(--ds-blue); outline-offset: 4px; }
+
+/* --- 404 PAGE DARK BRANDING --- */
+.main-404-section {
+  background: var(--ds-black) !important;
+}
+.main-404-section h1,
+.main-404-section [class*="heading"] {
+  color: var(--ds-white) !important;
+}
+.main-404-section p,
+.main-404-section [class*="rte"] {
+  color: var(--ds-white-muted) !important;
+}
+.main-404-section .button {
+  background: var(--ds-blue) !important;
+  color: var(--ds-white) !important;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  border-radius: 0 !important;
+  border-color: var(--ds-blue) !important;
+}
+.main-404-section .button:hover {
+  background: var(--ds-blue-bright) !important;
+}
+
+
+/* --- SCROLL-TO-TOP --- */
+.ds-scroll-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem; z-index: 999;
   width: 40px; height: 40px;
   display: flex; align-items: center; justify-content: center;
   background: var(--ds-blue); color: var(--ds-white);
@@ -435,8 +475,7 @@
 .main-404-section {
   background: var(--ds-black) !important;
 }
-.main-404-section h1,
-.main-404-section [class*="heading"] {
+.main-404-section h1 {
   color: var(--ds-white) !important;
 }
 .main-404-section p,
@@ -689,418 +728,4 @@ product-card [class*="badge"] {
   .ds-pf__card { padding: 1.25rem 1rem; gap: 1rem; }
   .ds-pf__icon { width: 32px; height: 32px; }
   .ds-pf__icon svg { width: 18px; height: 18px; }
-}
-
-
-/* --- FREE SHIPPING PROGRESS BAR --- */
-.ds-fsb {
-  padding: 1rem 1.25rem;
-  margin: 0 var(--cart-drawer-padding, 1.25rem) 0.5rem;
-  background: rgba(0,123,255,0.06);
-  border: 1px solid rgba(0,123,255,0.15);
-  border-radius: 6px;
-}
-.ds-fsb__text {
-  font: 400 0.8125rem/1.4 var(--ds-font-body);
-  color: var(--color-foreground, #111);
-  margin: 0 0 0.625rem;
-  text-align: center;
-}
-.ds-fsb__text strong { color: var(--ds-blue); font-weight: 700; }
-.ds-fsb__text--complete {
-  color: #1a8917; font-weight: 600; margin-bottom: 0;
-  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
-}
-.ds-fsb__check {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 18px; height: 18px; background: #1a8917; color: #fff;
-  border-radius: 50%; font-size: 0.6875rem; font-weight: 700;
-}
-.ds-fsb__track {
-  height: 6px; background: rgba(0,0,0,0.08);
-  border-radius: 100px; overflow: hidden;
-}
-.ds-fsb__text--complete + .ds-fsb__track { display: none; }
-.ds-fsb__fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--ds-blue), var(--ds-blue-bright));
-  border-radius: 100px;
-  transition: width 0.5s var(--ds-ease);
-}
-
-/* --- FITMENT / COMPATIBILITY ROW --- */
-.ds-fitment {
-  display: flex; align-items: flex-start; gap: 0.75rem;
-  padding: 0.875rem 1rem; margin: 1rem 0;
-  background: rgba(0,123,255,0.06);
-  border: 1px solid rgba(0,123,255,0.15);
-  border-radius: 6px;
-}
-.ds-fitment__icon { flex-shrink: 0; width: 20px; height: 20px; color: var(--ds-blue); margin-top: 1px; }
-.ds-fitment__icon svg { width: 100%; height: 100%; }
-.ds-fitment__body { display: flex; flex-direction: column; gap: 0.15rem; }
-.ds-fitment__label {
-  font: 700 0.6875rem/1 var(--ds-font-body);
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ds-blue);
-}
-.ds-fitment__value { font: 400 0.875rem/1.5 var(--ds-font-body); color: #333; }
-
-/* --- HONEST DELIVERY LINE (product page) --- */
-.ds-product-delivery-line {
-  font: 400 0.8125rem/1.5 var(--ds-font-body);
-  color: #555; margin: 0.75rem 0 0;
-  padding-top: 0.75rem; border-top: 1px solid #eee;
-}
-
-
-/* --- PRODUCT CARD: MOBILE QUICK-ADD ALWAYS VISIBLE + TAP TARGETS --- */
-/* Task 3: on mobile the quick-add must never be hover-only. Force it visible. */
-@media screen and (max-width: 749px) {
-  product-card {
-    --quick-add-mobile-display: flex !important;
-    --quick-add-mobile-opacity: 1 !important;
-  }
-  product-card .quick-add__button {
-    opacity: 1 !important;
-    display: flex !important;
-    /* Task 7: guarantee a 44px minimum tap target on mobile */
-    min-height: 44px;
-    min-width: 44px;
-  }
-}
-
-/* Task 7: card primary link is a clear, single tap target with visible focus */
-product-card .product-card__link:focus-visible {
-  outline: 2px solid var(--ds-blue);
-  outline-offset: 2px;
-}
-
-/* Task 1: enforce a clean square frame regardless of supplier photo dimensions.
-   The image_ratio:square block setting handles the ratio; this guarantees the
-   media fills the frame consistently (object-fit: cover) across mixed photos. */
-product-card .product-card__content img,
-product-card .card-gallery img {
-  object-fit: cover;
-}
-
-
-/* --- REMOVE HEADER HAIRLINE ON SCROLL/STICKY --- */
-/* The header row renders a border-bottom via --color-border when it switches from
-   transparent to sticky. On the dark scheme it shows as a stray white line.
-   Force it off across all header row states. */
-.header__row--top,
-.header__row--top .header__columns,
-.header__row--bottom,
-.header[data-sticky-state='active'] .header__row--top,
-.header[data-sticky-state='active'] .header__row--top .header__columns {
-  border-bottom: 0 !important;
-  --border-bottom-width: 0px !important;
-  --border-bottom-width-mobile: 0px !important;
-}
-
-
-/* ==========================================================================
-   LIGHT SECTION ACCENTS — break up the all-dark layout with white sections.
-   Trust and Reviews flip to a clean white background with dark text so the
-   homepage reads: dark hero -> light trust -> dark grid -> light reviews -> dark.
-   ========================================================================== */
-
-/* --- TRUST: reverted to dark (matches original carbon section) --- */
-.ds-trust {
-  background: var(--ds-carbon);
-  border-top: 1px solid var(--ds-border);
-  border-bottom: 1px solid var(--ds-border);
-}
-.ds-trust__header {
-  border-right: 1px solid var(--ds-border);
-}
-.ds-trust__title { color: var(--ds-white); }
-.ds-trust__subtitle { color: var(--ds-white-muted); }
-.ds-trust-item { border-right: 1px solid var(--ds-border); }
-.ds-trust-item__icon { color: var(--ds-blue); }
-.ds-trust-item__title { color: var(--ds-white); }
-.ds-trust-item__description { color: var(--ds-white-muted); }
-@media (max-width: 989px) {
-  .ds-trust__header { border-right: none; border-bottom: 1px solid var(--ds-border); }
-  .ds-trust-item { border-bottom: 1px solid var(--ds-border); }
-}
-
-/* --- REVIEWS: light variant --- */
-.ds-reviews {
-  background: var(--ds-white);
-}
-.ds-reviews__title { color: var(--ds-black); }
-.ds-reviews__subtitle { color: #666; }
-.ds-review-card {
-  background: #f7f7f8;
-  border-left: 3px solid var(--ds-blue);
-}
-.ds-review-card__text { color: #333; }
-.ds-review-card__author { color: #888; }
-
-/* --- CATEGORIES header: keep dark section but add a subtle white top hairline
-   so the transition from the hero reads cleaner --- */
-.ds-categories {
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-/* --- NEWSLETTER: lighten from near-black carbon to a softer dark so the page
-   doesn't end on pure black; keeps text light but feels less heavy --- */
-.ds-newsletter {
-  background: #17171a;
-}
-
-/* --- Product card titles/prices need dark text when card sits on light grid.
-   Best Sellers grid stays dark, so no change there. But product recommendation
-   and any light-scheme product grids get readable text. --- */
-.shopify-section:not(:has(product-card)) { }
-
-
-/* ==========================================================================
-   PRODUCT CARD POLISH (2026) — consolidated final overrides.
-   Appended last so it wins the cascade over the earlier accumulated blocks.
-   Goals: even square images, tidy content padding, clear title/price
-   hierarchy, refined hover, mobile-safe quick-add, honest rating slot.
-   ========================================================================== */
-
-/* Card shell: subtle lift, crisp edge, smooth transitions */
-product-card .product-card__content {
-  background: var(--ds-carbon) !important;
-  border: 1px solid var(--ds-border) !important;
-  border-radius: 0 !important;
-  padding: 0 0 1rem !important;
-  transition: border-color var(--ds-speed) var(--ds-ease),
-              box-shadow var(--ds-speed) var(--ds-ease),
-              transform var(--ds-speed) var(--ds-ease);
-}
-product-card:hover .product-card__content {
-  border-color: rgba(0,123,255,0.4) !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
-  transform: translateY(-2px);
-}
-
-/* Square, uniform image frame — scope ONLY to the real gallery/slideshow.
-   Do NOT target [class*="media"] broadly: it matches group-block__media-wrapper
-   (an empty layout container) and turns it into a big empty black square. */
-product-card .card-gallery,
-product-card .card-gallery slideshow-component {
-  aspect-ratio: 1 / 1 !important;
-  overflow: hidden !important;
-  background: #0f0f0f;
-}
-/* Make the gallery the positioning context so the absolutely-positioned
-   quick-add pins to the bottom-right of the IMAGE, not the whole card. */
-product-card .card-gallery {
-  position: relative !important;
-}
-product-card .card-gallery img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-}
-
-/* Collapse the empty duplicate media wrapper the block layout injects under
-   the text (it renders as a tall black void beneath title/price). */
-product-card .group-block__media-wrapper:empty,
-product-card .group-block__media-wrapper:not(:has(img)):not(:has(svg)) {
-  display: none !important;
-}
-
-/* Title: clean hierarchy in white. Horizon renders the visible card title as a
-   text-block with a dynamic "...__title" class wrapping an h3. Target both the
-   title text-block and any heading inside the card, and force readable white. */
-/* Title color is set at the BLOCK level (color:#ffffff in the template JSON),
-   so no dynamic-class CSS is needed. Only styling + hover accent live here,
-   using stable selectors ([class*="__title"] for homepage text-block titles,
-   product-title for the collection block). */
-product-card [class*="__title"],
-product-card [class*="__title"] :where(h1,h2,h3,h4),
-product-card [class*="product-title"] {
-  font-family: var(--ds-font-heading) !important;
-  font-weight: 600 !important;
-  font-size: 0.9375rem !important;
-  line-height: 1.35 !important;
-  letter-spacing: -0.01em !important;
-  transition: color 0.2s;
-}
-product-card:hover [class*="__title"],
-product-card:hover [class*="__title"] :where(h1,h2,h3,h4),
-product-card:hover [class*="product-title"] {
-  color: var(--ds-blue-bright) !important;
-}
-
-/* Price hierarchy: current price bold blue, compare-at muted strike */
-product-card [class*="price"] {
-  font-family: var(--ds-font-body) !important;
-  font-weight: 700 !important;
-  font-size: 1rem !important;
-  color: var(--ds-white) !important;
-  margin-top: 0.35rem !important;
-}
-product-card [class*="price"] s,
-product-card [class*="price"] del {
-  color: var(--ds-white-muted) !important;
-  font-weight: 400 !important;
-  font-size: 0.8125rem !important;
-  margin-left: 0.4rem;
-}
-/* Sale price emphasised in blue when a compare-at strike is present */
-product-card [class*="price"]:has(s) ,
-product-card [class*="price--on-sale"] {
-  color: var(--ds-blue-bright) !important;
-}
-
-/* Sale badge: sharp, uppercase, top-left */
-product-card [class*="badge"] {
-  border-radius: 0 !important;
-  font: 700 0.625rem/1 var(--ds-font-body) !important;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--ds-blue) !important;
-  color: var(--ds-white) !important;
-  padding: 0.35rem 0.55rem !important;
-}
-
-/* Quick-add: the theme pins the button ABSOLUTELY over the bottom of the image.
-   Respect that positioning (do NOT force width:100% or position:static — that
-   creates an ugly full-width blue band across the photo). Instead keep it a
-   compact pill tucked in the bottom-right corner of the image, styled blue.
-   Stable selectors only: quick-add-component + .quick-add__button. */
-product-card .quick-add__button {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 0 !important;
-  width: 44px !important;
-  height: 44px !important;
-  min-height: 44px !important;
-  min-width: 44px !important;
-  padding: 0 !important;
-  background: var(--ds-blue) !important;
-  color: var(--ds-white) !important;
-  border: none !important;
-  border-radius: 0 !important;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-}
-product-card .quick-add__button:hover {
-  background: var(--ds-blue-bright) !important;
-}
-/* Position the quick-add neatly at the image's bottom-right corner */
-product-card quick-add-component,
-product-card .quick-add {
-  position: absolute !important;
-  right: 0.5rem !important;
-  bottom: 0.5rem !important;
-  left: auto !important;
-  width: auto !important;
-  z-index: 5 !important;
-}
-/* Multi-variant cards render BOTH an "--add" (collapsed, unused) and a
-   "--choose options" button. Hide the collapsed add button so no stray
-   icon/circle shows; the choose-options button is the real action. */
-product-card .quick-add__product-form-component:has(.quick-add__button--choose) .quick-add__button--add {
-  display: none !important;
-}
-/* The inner .add-to-cart-text span carries a white background from the theme
-   (that was the "white blob"). Neutralise it and show a clean white icon. */
-product-card .quick-add__button .add-to-cart-text {
-  background: transparent !important;
-  color: var(--ds-white) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: auto !important;
-  gap: 0 !important;
-  font-size: 0 !important; /* hide the "Choose"/"Add" label; keep the icon only */
-}
-product-card .quick-add__button .svg-wrapper,
-product-card .quick-add__button .add-to-cart-icon,
-product-card .quick-add__button svg {
-  width: 18px !important;
-  height: 18px !important;
-  color: var(--ds-white) !important;
-  --icon-stroke-width: 2;
-}
-
-/* Mobile: quick-add always visible (never hover-only) */
-@media screen and (max-width: 749px) {
-  product-card quick-add-component,
-  product-card .quick-add {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    display: block !important;
-  }
-}
-
-/* Blue underline reveal on hover */
-product-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--ds-blue);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--ds-speed) var(--ds-ease);
-  z-index: 10;
-  pointer-events: none;
-}
-product-card:hover::after { transform: scaleX(1); }
-
-/* Rating slot: only renders when a real widget is injected; never fake stars */
-product-card .product-card__rating:empty,
-product-card [class*="jdgm-prev-badge"]:empty {
-  display: none !important;
-}
-
-
-/* ==========================================================================
-   ANNOUNCEMENT BAR — TYPEWRITER EFFECT
-   Types each announcement phrase out with a blinking caret, then cycles.
-   Purely presentational; the static slides remain as the accessible source
-   (and are shown as-is under prefers-reduced-motion).
-   ========================================================================== */
-.ds-typewriter {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  width: 100%;
-  min-height: 1em;
-  font: inherit;
-  color: inherit;
-  letter-spacing: 0.02em;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-}
-/* Shown once JS activates the effect (or when rendering the static fallback). */
-.ds-typewriter--active,
-.ds-typewriter--static {
-  display: inline-flex;
-}
-.ds-typewriter__text {
-  font: inherit;
-  color: inherit;
-}
-/* Blinking caret — a thin blue bar that follows the typed text. */
-.ds-typewriter__caret {
-  display: inline-block;
-  width: 2px;
-  height: 1.05em;
-  margin-left: 3px;
-  background: var(--ds-blue, #007BFF);
-  transform: translateY(2px);
-  animation: ds-caret-blink 1s steps(1, end) infinite;
-}
-.ds-typewriter--static .ds-typewriter__caret { display: none; }
-@keyframes ds-caret-blink {
-  0%, 50% { opacity: 1; }
-  50.01%, 100% { opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ds-typewriter__caret { animation: none; opacity: 0; }
 }
